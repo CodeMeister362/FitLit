@@ -16,7 +16,21 @@ section {
 }
 
 body, html {
-  background-image: linear-gradient(to top, #ff9a9e 0%, #fecfef 99%, #fecfef 100%);
+  background-image: linear-gradient(to top, #4123ef 0%, #6fbce9 99%, #cff5fe 100%);
   background-repeat: no-repeat;
   height: 100%;
+  padding: 0px;
+  margin: 0px;
+}
+
+.cards {
+  padding: 5px;
+  border:#9abfff solid 2px;
+  background-color:#9abfff;
+  border-radius: 5px;
+}
+
+.header-img {
+  opacity: 70%;
+  
 }
