@@ -1,3 +1,20 @@
+/* * {
+  border: 1px black solid;
+} */
+
+h1 {
+  text-align: left;
+}
+
+h2 {
+  text-align: center;
+}
+
+section {
+  display: flex;
+  justify-content: space-evenly;
+}
+
 body, html {
   background-image: linear-gradient(to top, #ff9a9e 0%, #fecfef 99%, #fecfef 100%);
   background-repeat: no-repeat;
