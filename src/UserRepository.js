@@ -1,12 +1,12 @@
 class UserRepository {
-  constructor(details) {
-    this.id = details.id
-    this.name = details.name
-    this.address = details.address
-    this.email = details.email
-    this.strideLength = details.strideLength
-    this.dailyStepGoal = details.dailyStepGoal
-    this.friends = details.friends
+  constructor(id, name, address, email, strideLength) {
+    this.id = id
+    this.name = name
+    this.address = address
+    this.email = email
+    this.strideLength = strideLength
+  //   this.dailyStepGoal = details.dailyStepGoal
+  //   this.friends = details.friends
   }
 }
 
