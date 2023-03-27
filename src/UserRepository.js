@@ -22,7 +22,10 @@ class UserRepository {
        return Math.round(totalSteps / arr.length)
      }
 
-
+     getFirstName = (id, arr) => {
+      const fullName = arr.find((user) => user.id === id)
+       return fullName.name.split(' ').shift()
+      }
 }
 
 

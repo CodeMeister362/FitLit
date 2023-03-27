@@ -77,7 +77,7 @@ describe('User Repository', () => {
     assert.equal(user3.getAverageSteps(users), 6333)
   })
 
-  it.skip('should return the first name of the user', function() {
+  it('should return the first name of the user', function() {
 
     assert.equal(user1.getFirstName(1, users), 'Trystan')
     assert.equal(user2.getFirstName(2, users), 'Tyreek')
