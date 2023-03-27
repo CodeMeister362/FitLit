@@ -16,16 +16,16 @@ class UserRepository {
   getAverageSteps = (arr) => {
     const steps = arr.map((user) => user.dailyStepGoal)  
      
-     const totalSteps = steps.reduce((curr, acc) => {
-       return (acc + curr);
-     }, 0)
-       return Math.round(totalSteps / arr.length)
-     }
+      const totalSteps = steps.reduce((curr, acc) => {
+        return (acc + curr);
+    }, 0)
+        return Math.round(totalSteps / arr.length)
+    }
 
-     getFirstName = (id, arr) => {
-      const fullName = arr.find((user) => user.id === id)
-       return fullName.name.split(' ').shift()
-      }
+  getFirstName = (id, arr) => {
+    const fullName = arr.find((user) => user.id === id)
+      return fullName.name.split(' ').shift()
+  }
 }
 
 
