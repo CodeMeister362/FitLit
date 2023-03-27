@@ -72,16 +72,16 @@ describe('User Repository', () => {
 
   it('should return average steps of all users', function() {
 
-    assert.equal(user1.getAverageSteps(), 6333.33333)
-    assert.equal(user2.getAverageSteps(), 6333.33333)
-    assert.equal(user3.getAverageSteps(), 6333.33333)
+    assert.equal(user1.getAverageSteps(users), 6333)
+    assert.equal(user2.getAverageSteps(users), 6333)
+    assert.equal(user3.getAverageSteps(users), 6333)
   })
 
   it.skip('should return the first name of the user', function() {
 
-    assert.equal(user1.getFirstName(), 'Trystan')
-    assert.equal(user2.getFirstName(), 'Tyreek')
-    assert.equal(user1.getFirstName(), 'Colt')
+    assert.equal(user1.getFirstName(1, users), 'Trystan')
+    assert.equal(user2.getFirstName(2, users), 'Tyreek')
+    assert.equal(user1.getFirstName(3, users), 'Colt')
   })
   
 });

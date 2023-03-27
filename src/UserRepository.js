@@ -10,18 +10,19 @@ class UserRepository {
   }
 
   getUserData = (id, arr) => {
-    const data = arr.find((user) => user.id === id)
-    return data
+    return arr.find((user) => user.id === id)  
   }
 
-  getAverageSteps = () => {
-    const steps = users.map((user) => user.dailyStepGoal)  
+  getAverageSteps = (arr) => {
+    const steps = arr.map((user) => user.dailyStepGoal)  
      
      const totalSteps = steps.reduce((curr, acc) => {
        return (acc + curr);
      }, 0)
-       return Math.round(totalSteps / users.length)
+       return Math.round(totalSteps / arr.length)
      }
+
+
 }
 
 
