@@ -6,14 +6,15 @@ describe('User Repository', () => {
 
   let user1;
   let user2;
-  let user3
+  let user3;
+  let users;
 
   beforeEach(() => {
-
-  user1 = new UserRepository(1, 'Trystan Gorczany', '9484 Lucas Flat, West Kittymouth WA 67504', 'Taurean_Pollich31@gmail.com', 4, 7000, [5, 43, 46, 11])
-  user2 = new UserRepository(2, 'Tyreek VonRueden', '623 Koelpin Skyway, Lake Luigichester MN 77576-1678', 'Nicolette_Halvorson43@yahoo.com', 4.5, 9000, [13, 19, 3])
-  user3 = new UserRepository(3, 'Colt Rohan', '48010 Balistreri Harbor, Cleobury IN 43317', 'Wilford.Barton@gmail.com', 2.7, 3000, [31, 16, 15, 7])    
-
+    
+    user1 = new UserRepository(1, 'Trystan Gorczany', '9484 Lucas Flat, West Kittymouth WA 67504', 'Taurean_Pollich31@gmail.com', 4, 7000, [5, 43, 46, 11])
+    user2 = new UserRepository(2, 'Tyreek VonRueden', '623 Koelpin Skyway, Lake Luigichester MN 77576-1678', 'Nicolette_Halvorson43@yahoo.com', 4.5, 9000, [13, 19, 3])
+    user3 = new UserRepository(3, 'Colt Rohan', '48010 Balistreri Harbor, Cleobury IN 43317', 'Wilford.Barton@gmail.com', 2.7, 3000, [31, 16, 15, 7])    
+    users = [user1, user2, user3]
   })
 
   it('should be a function', function () {
@@ -58,23 +59,29 @@ describe('User Repository', () => {
 
   it('should return a user based on the id', function() {
 
-    assert.equal(user1.getUserData(), user1)
-    assert.equal(user1.getUserData(), user2)
-    assert.equal(user1.getUserData(), user3)
+    
+    assert.deepEqual(user1.getUserData(1, users), user1)
+    
+    
+    assert.deepEqual(user2.getUserData(2, users), user2)
+    
+  
+    assert.deepEqual(user3.getUserData(3, users), user3)
+
   })
 
   it('should return average steps of all users', function() {
 
-    assert.equal(user1.getAverageSteps(), 6333.33333)
-    assert.equal(user2.getAverageSteps(), 6333.33333)
-    assert.equal(user3.getAverageSteps(), 6333.33333)
+    assert.equal(user1.getAverageSteps(users), 6333)
+    assert.equal(user2.getAverageSteps(users), 6333)
+    assert.equal(user3.getAverageSteps(users), 6333)
   })
 
   it('should return the first name of the user', function() {
 
-    assert.equal(user1.getFirstName(), 'Trystan')
-    assert.equal(user2.getFirstName(), 'Tyreek')
-    assert.equal(user1.getFirstName(), 'Colt')
+    assert.equal(user1.getFirstName(1, users), 'Trystan')
+    assert.equal(user2.getFirstName(2, users), 'Tyreek')
+    assert.equal(user1.getFirstName(3, users), 'Colt')
   })
   
 });
