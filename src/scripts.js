@@ -15,6 +15,7 @@ console.log('This is the JavaScript entry file - your code begins here.');
 
 // import userData from './data/users';
 import UserRepository from './UserRepository';
+import Water from './WaterClass.js';
 
 
   
@@ -49,7 +50,7 @@ import UserRepository from './UserRepository';
     
     const waterCard = document.querySelector('.water-card')
 
-    const userWater = new UserRepository(data.hydrationData[randomNum])
+    const userWater = new Water(data.hydrationData[randomNum])
     console.log(userWater)
     waterCard.innerHTML = 
   `<h3>Hydration info</h3>
