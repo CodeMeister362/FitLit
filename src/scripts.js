@@ -96,6 +96,17 @@ import Water from './WaterClass.js';
   // });
 })
 
+    userCard.innerHTML = 
+  `<h3>Welcome ${user.getFirstName(user.id, userData.users)}!</h3>
+    <ul>
+        <li>Your daily step goal is ${user.dailyStepGoal}</li>
+        <li>The average step goal of all FitLitFans is ${user.getAverageSteps(userData.users)}</li>
+      </ul>`
+  });
+  })
+
+
+
 
 
 
