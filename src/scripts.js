@@ -24,7 +24,7 @@ import Water from './hydrationClass.js';
   window.addEventListener("load", () => {
 
     function getRandomInt() {
-      return Math.floor(Math.random() * 49);
+      return Math.floor(Math.random() * 50);
     }
     
     const randomNum = getRandomInt();
@@ -32,9 +32,9 @@ import Water from './hydrationClass.js';
   apiCalls.fetchUsers().then(data => {
 
     const userCard = document.querySelector('.user-card');
-
+    console.log(data.users)
     const user = new UserRepository(data.users[randomNum].id, data.users[randomNum].name, data.users[randomNum].address, data.users[randomNum].email, data.users[randomNum].strideLength, data.users[randomNum].dailyStepGoal, data.users[randomNum].friends)
-
+     console.log(user) 
     userCard.innerHTML = 
   `<h3>Welcome ${user.getFirstName(user.id, data.users)}!</h3>
    <ul>
@@ -44,15 +44,15 @@ import Water from './hydrationClass.js';
   });
 
   apiCalls.fetchHydration().then(data => {
-    
+    console.log(data.hydrationData)
     const waterCard = document.querySelector('.water-card')
 
     const userWater = new Water(data.hydrationData[randomNum])
     console.log(userWater)
-    waterCard.innerHTML = 
+    waterCard.innerHTML =
   `<h3>Hydration info</h3>
    <ul>
-     <li>Your average fluid ounces consumed per day is ${userWater.id.numOunces}</li>
+     <li>Your average fluid ounces consumed per day is ${userWater.averageOuncesPerDay(data.hydrationData, userWater.id)}</li>
      <li>This is how many fluid ounces they consumed for a specific day...</li>
      <li>This is how many fluid ounces of water consumed each day over the course of a week..</li>
    </ul>`
@@ -92,13 +92,6 @@ import Water from './hydrationClass.js';
   //  </ul>`
   // });
 })
-
-    userCard.innerHTML = 
-  `<h3>Welcome ${user.getFirstName(user.id, userData.users)}!</h3>
-    <ul>
-        <li>Your daily step goal is ${user.dailyStepGoal}</li>
-        <li>The average step goal of all FitLitFans is ${user.getAverageSteps(userData.users)}</li>
-      </ul>`
 
 
 
