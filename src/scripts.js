@@ -22,7 +22,13 @@ import Water from './hydrationClass.js';
 
   
   window.addEventListener("load", () => {
-
+//======================================================
+    apiCalls.kanyeIsBatShitCrazy().then(data => {
+    const ye = document.querySelector(".kanye")
+    //console.log(data.quote)
+    ye.innerText = `"${data.quote}" -Ye`
+  })
+//======================================================
     function getRandomInt() {
       return Math.floor(Math.random() * 50);
     }
@@ -44,11 +50,11 @@ import Water from './hydrationClass.js';
   });
 
   apiCalls.fetchHydration().then(data => {
-    console.log(data.hydrationData)
+    //console.log(data.hydrationData)
     const waterCard = document.querySelector('.water-card')
 
     const userWater = new Water(data.hydrationData[randomNum])
-    console.log(userWater)
+    console.log('water', userWater)
     waterCard.innerHTML =
   `<h3>Hydration info</h3>
    <ul>

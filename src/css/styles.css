@@ -71,3 +71,10 @@ body {
 h3 {
   text-align: center;
 }
+
+.kanye {
+  font-style: italic;
+  font-size: x-large;
+  color: yellow;
+  text-align: center;
+}

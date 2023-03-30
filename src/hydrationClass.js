@@ -1,11 +1,12 @@
 class Water{
   constructor(data) {
-    // this.data = data
+    //this.data = data
     this.id = data.userID
     this.date = data.date
     this.numOunces = data.numOunces
   }
   averageOuncesPerDay(data, givenID) {
+    console.log('what is this', this.data)
     let userNumOunces = data.filter((hydrationObject) => hydrationObject.userID === givenID)
     let average = userNumOunces.reduce((acc, currentDay) => {
       acc += currentDay.numOunces / userNumOunces.length
