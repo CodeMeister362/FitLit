@@ -9,13 +9,15 @@ import './images/turing-logo.png';
 import './images/runner.png';
 import './images/wave.png';
 
+import * as apiCalls from './apiCalls'; 
+
 console.log('This is the JavaScript entry file - your code begins here.');
 
 // An example of how you tell webpack to use a JS file
 
 // import userData from './data/users';
 import UserRepository from './UserRepository';
-import Water from './WaterClass.js';
+import Water from './hydrationClass.js';
 
 
   
@@ -27,9 +29,7 @@ import Water from './WaterClass.js';
     
     const randomNum = getRandomInt();
 
-  fetch("https://fitlit-api.herokuapp.com/api/v1/users")
-  .then(response => response.json())
-  .then(data => {
+  apiCalls.fetchUsers().then(data => {
 
     const userCard = document.querySelector('.user-card');
 
@@ -43,10 +43,7 @@ import Water from './WaterClass.js';
   </ul>`
   });
 
-
-  fetch("https://fitlit-api.herokuapp.com/api/v1/hydration")
-  .then(response => response.json())
-  .then(data => {
+  apiCalls.fetchHydration().then(data => {
     
     const waterCard = document.querySelector('.water-card')
 
@@ -102,8 +99,8 @@ import Water from './WaterClass.js';
         <li>Your daily step goal is ${user.dailyStepGoal}</li>
         <li>The average step goal of all FitLitFans is ${user.getAverageSteps(userData.users)}</li>
       </ul>`
-  });
-  })
+
+
 
 
 
