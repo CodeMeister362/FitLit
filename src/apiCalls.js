@@ -14,3 +14,7 @@ export function fetchHydration() {
     .then(response => response.json())
 }
 
+export function fetchActivity() {
+  return fetch("https://fitlit-api.herokuapp.com/api/v1/activity")
+  .then(response => response.json())
+}
