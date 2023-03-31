@@ -17,12 +17,13 @@ class Activity {
 			return stepsOnly
 	}
 
-	// getMinutesActive(givenId, date) {
-	// 	const userID = this.userData.find(person1 => {
-	// 		return person1.id === givenId 
-	// 	})	
-	// 	console.log(userID)
-	// }
+	getMinutesActive(givenId, date) {
+		const userID = this.userData.find(person1 => {
+			return person1.id === givenId 
+		})	
+		console.log(userID)
+	}
 }
+
 
 export default Activity;
