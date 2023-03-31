@@ -5,6 +5,7 @@ class Sleep{
     this.hoursSlept = data.hoursSlept
     this.sleepQuality = data.sleepQuality
   }
+  
   averageSleepPerDay(data, givenID) {
     let userHoursSlept = data.filter((sleepObject) => sleepObject.userID === givenID)
     let average = userHoursSlept.reduce((acc, currentDay) => {
