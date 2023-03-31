@@ -20,19 +20,25 @@ import Water from './hydrationClass';
 
   
   window.addEventListener("load", () => {
-
+//======================================================
+    apiCalls.kanyeIsBatShitCrazy().then(data => {
+    const ye = document.querySelector(".kanye")
+    //console.log(data.quote)
+    ye.innerText = `"${data.quote}" -Ye`
+  })
+//======================================================
+    function getRandomInt() {
+      return Math.floor(Math.random() * 50);
+    }
+    
+    const randomNum = getRandomInt();
 
   apiCalls.fetchUsers().then(data => {
 
     const userCard = document.querySelector('.user-card');
-    
-    function getRandomInt() {
-      return Math.floor(Math.random() * data.users.length);
-    }
-    const randomNum = getRandomInt();
-    
+    console.log(data.users)
     const user = new UserRepository(data.users[randomNum].id, data.users[randomNum].name, data.users[randomNum].address, data.users[randomNum].email, data.users[randomNum].strideLength, data.users[randomNum].dailyStepGoal, data.users[randomNum].friends)
-    console.log('line35', user.id)
+     console.log(user) 
     userCard.innerHTML = 
     `<h3>Welcome ${user.getFirstName(user.id, data.users)}!</h3>
     <ul>
@@ -42,22 +48,15 @@ import Water from './hydrationClass';
     });
 
   apiCalls.fetchHydration().then(data => {
-    
+    //console.log(data.hydrationData)
     const waterCard = document.querySelector('.water-card')
 
-    // console.log('line47', data.hydrationData)
-    function getRandomInt() {
-      return Math.floor(Math.random() * data.hydrationData.length);
-    }
-    const randomNum = getRandomInt();
-
-    const userWater = new Water(data.hydrationData)
-    console.log('line55', userWater)
-    console.log('line56', userWater.averageOuncesPerDay(randomNum))
-    waterCard.innerHTML = 
+    const userWater = new Water(data.hydrationData[randomNum])
+    console.log('water', userWater)
+    waterCard.innerHTML =
   `<h3>Hydration info</h3>
    <ul>
-     <li>Your average fluid ounces consumed per day is ${userWater.averageOuncesPerDay(randomNum)}</li>
+     <li>Your average fluid ounces consumed per day is ${userWater.averageOuncesPerDay(data.hydrationData, userWater.id)}</li>
      <li>This is how many fluid ounces they consumed for a specific day...</li>
      <li>This is how many fluid ounces of water consumed each day over the course of a week..</li>
    </ul>`
@@ -105,7 +104,6 @@ import Water from './hydrationClass';
   //  </ul>`
   // });
 })
-
 
 
 
