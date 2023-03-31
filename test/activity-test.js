@@ -76,6 +76,7 @@ describe('activity class', () => {
 					]
 			}]
 		})
+	})
 
 		it('should be a function', () => {
 			assert.isFunction(Activity)
@@ -93,6 +94,5 @@ describe('activity class', () => {
 			activity.getMinutesActive(2, "2023/03/24")
 
 			assert.equal(activity.getMinutesActive(), 125)
-		})
-	}) 
+		}) 
 })
