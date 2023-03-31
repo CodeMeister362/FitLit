@@ -11,52 +11,65 @@ import './images/wave.png';
 
 import * as apiCalls from './apiCalls'; 
 
-console.log('This is the JavaScript entry file - your code begins here.');
-
 // An example of how you tell webpack to use a JS file
 
 // import userData from './data/users';
 import UserRepository from './UserRepository';
-import Water from './hydrationClass.js';
+import Water from './hydrationClass';
 
 
   
   window.addEventListener("load", () => {
 
-    function getRandomInt() {
-      return Math.floor(Math.random() * 49);
-    }
-    
-    const randomNum = getRandomInt();
 
   apiCalls.fetchUsers().then(data => {
 
     const userCard = document.querySelector('.user-card');
-
+    
+    function getRandomInt() {
+      return Math.floor(Math.random() * data.users.length);
+    }
+    const randomNum = getRandomInt();
+    
     const user = new UserRepository(data.users[randomNum].id, data.users[randomNum].name, data.users[randomNum].address, data.users[randomNum].email, data.users[randomNum].strideLength, data.users[randomNum].dailyStepGoal, data.users[randomNum].friends)
-
+    console.log('line35', user.id)
     userCard.innerHTML = 
-  `<h3>Welcome ${user.getFirstName(user.id, data.users)}!</h3>
-   <ul>
-    <li>Your daily step goal is ${user.dailyStepGoal}</li>
-    <li>The average step goal of all FitLitFans is ${user.getAverageSteps(data.users)}</li>
-  </ul>`
-  });
+    `<h3>Welcome ${user.getFirstName(user.id, data.users)}!</h3>
+    <ul>
+      <li>Your daily step goal is ${user.dailyStepGoal}</li>
+      <li>The average step goal of all FitLitFans is ${user.getAverageSteps(data.users)}</li>
+    </ul>`
+    });
 
   apiCalls.fetchHydration().then(data => {
     
     const waterCard = document.querySelector('.water-card')
 
-    const userWater = new Water(data.hydrationData[randomNum])
-    console.log(userWater)
+    // console.log('line47', data.hydrationData)
+    function getRandomInt() {
+      return Math.floor(Math.random() * data.hydrationData.length);
+    }
+    const randomNum = getRandomInt();
+
+    const userWater = new Water(data.hydrationData)
+    console.log('line55', userWater)
+    console.log('line56', userWater.averageOuncesPerDay(randomNum))
     waterCard.innerHTML = 
   `<h3>Hydration info</h3>
    <ul>
-     <li>Your average fluid ounces consumed per day is ${userWater.id.numOunces}</li>
+     <li>Your average fluid ounces consumed per day is ${userWater.averageOuncesPerDay(randomNum)}</li>
      <li>This is how many fluid ounces they consumed for a specific day...</li>
      <li>This is how many fluid ounces of water consumed each day over the course of a week..</li>
    </ul>`
   });
+
+  apiCalls.fetchSleep().then(data => {
+    console.log('sleep', data)
+  })
+
+  apiCalls.fetchActivity().then(data => {
+    console.log('activity', data)
+  })
 
   // fetch("https://fitlit-api.herokuapp.com/api/v1/sleep")
   // .then(response => response.json())
@@ -93,12 +106,6 @@ import Water from './hydrationClass.js';
   // });
 })
 
-    userCard.innerHTML = 
-  `<h3>Welcome ${user.getFirstName(user.id, userData.users)}!</h3>
-    <ul>
-        <li>Your daily step goal is ${user.dailyStepGoal}</li>
-        <li>The average step goal of all FitLitFans is ${user.getAverageSteps(userData.users)}</li>
-      </ul>`
 
 
 
