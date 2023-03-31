@@ -5,9 +5,10 @@ class Activity {
 	}
 
 	getMilesWalked(givenId, date) {
-		const userID = this.userData.find(person1 => {
-			return person1.id === givenId 
+		const userID = this.userData.users.find(person => {
+			return person.id === givenId 
 		})
+		console.log(userID)
 		const userStrideLength = userID.strideLength
 		let milesInADay = this.data.activityData.find(person => {
 			return person.userID === givenId && person.date === date
@@ -17,12 +18,13 @@ class Activity {
 			return stepsOnly
 	}
 
-	// getMinutesActive(givenId, date) {
-	// 	const userID = this.userData.find(person1 => {
-	// 		return person1.id === givenId 
-	// 	})	
-	// 	console.log(userID)
-	// }
+	getMinutesActive(givenId, date) {
+		const userID = this.userData.find(person1 => {
+			return person1.id === givenId 
+		})	
+		console.log(userID)
+	}
 }
+
 
 export default Activity;
