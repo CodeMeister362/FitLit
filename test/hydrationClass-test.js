@@ -1,6 +1,6 @@
 import { assert } from 'chai';
-import Water from '../src/hydrationClass'
-import data from '../src/data/hydrationmock'
+import Water from '../src/hydrationClass';
+import data from '../src/data/hydrationmock';
 
 describe('Hydration Class', () => {
 
