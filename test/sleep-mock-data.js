@@ -1,4 +1,5 @@
-const sampleSleepData = [
+const sampleSleepData = {
+  sampleSleep: [
 {
 "userID": 1,
 "date": "2023/03/24",
@@ -82,6 +83,6 @@ const sampleSleepData = [
 "date": "2023/03/30",
 "hoursSlept": 10.1,
 "sleepQuality": 3.2
-},
-];
+}]
+};
 export default sampleSleepData;
