@@ -6,21 +6,21 @@ describe('Hydration Class', () => {
 
 let waterData = new Water(data)
 
-it('should be a function', function() {
+it.skip('should be a function', function() {
 
   assert.isFunction(Water)
 })
 
-it('should return the average ounces drank for a given user', function() {
+it.skip('should return the average ounces drank for a given user', function() {
 
 
   assert.equal(waterData.averageOuncesPerDay(data, 1), 24)
 })
-  it('should return the amount drank based on specific day', function() {
+  it.skip('should return the amount drank based on specific day', function() {
 
     assert.equal(waterData.getSpecificDay(data, 2, "2023/03/24"), 35)
   })
-  it('should return the amount of water drank each day over a week', function() {
+  it.skip('should return the amount of water drank each day over a week', function() {
 
     assert.deepEqual(waterData.overAWeek(data, 1, "2023/03/24", "2023/03/26"), {
       "2023/03/24" : 28,

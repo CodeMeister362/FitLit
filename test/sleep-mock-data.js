@@ -1,4 +1,4 @@
-export default { sampleSleepData: [
+const sampleSleepData = [
 {
 "userID": 1,
 "date": "2023/03/24",
@@ -83,4 +83,5 @@ export default { sampleSleepData: [
 "hoursSlept": 10.1,
 "sleepQuality": 3.2
 },
-]}
+];
+export default sampleSleepData;
