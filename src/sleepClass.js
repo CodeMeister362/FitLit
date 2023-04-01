@@ -46,7 +46,7 @@ sleepData.filter((sleepObject) =>
   }
 
   getSleepQualitytByWeek(givenID, start, end) {
-   let sleepQualityWeek = []
+   let sleepQualityWeek = [];
    const user = this.data.sleepData.filter((item) => item.userID === givenID);
    user.forEach((item) => {
     if (item.date >= start && item.date <= end) {

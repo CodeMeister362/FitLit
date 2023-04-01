@@ -80,10 +80,15 @@ import Sleep from './sleepClass';
 
     const sleepDay = userSleep.getHoursByDay(1, todayDate);
     const dayQuality = userSleep.getSleepQualityByDay(1, todayDate)
-    const sleepWeek = userSleep.getHoursSleptByWeek(1, todayDate, aWeekEarlier);
-    const qualityWeek = userSleep.getSleepQualitytByWeek(1, todayDate, aWeekEarlier);
-    console.log(qualityWeek)
+    const sleepWeek = userSleep.getHoursSleptByWeek(1, aWeekEarlier, todayDate);
+    const qualityWeek = userSleep.getSleepQualitytByWeek(1, aWeekEarlier, todayDate,);
+    const sleepWeekKeys = Object.keys(sleepWeek)
+    const sleepWeekValues = Object.values(sleepWeek)
     const qualityWeekKeys = Object.keys(qualityWeek);
+    const qualityWeekValues = Object.values(qualityWeek);
+    const allTimeSleep = userSleep.getAllTimeSleepAve(1);
+    const allTimeSleepQuality = userSleep.getAllTimeQualityAve(1);
+
     console.log("This is sleepWeek:", sleepWeek)
     sleepCard.innerHTML = 
     `<h3>Your Sleep</h3>
@@ -92,11 +97,23 @@ import Sleep from './sleepClass';
         <p>${sleepDay} hours slept</p>
         <p>${dayQuality} sleep quality</p>
       <li><b>Last Week</b></li>
-        <p>${sleepWeek} hours slept</p>
-        <p>${qualityWeekKeys} sleep quality</p>
+        <p>${sleepWeekKeys[0]}: ${sleepWeekValues[0]} hours slept</p>
+        <p>${sleepWeekKeys[1]}: ${sleepWeekValues[1]} hours slept</p>
+        <p>${sleepWeekKeys[2]}: ${sleepWeekValues[2]} hours slept</p>
+        <p>${sleepWeekKeys[3]}: ${sleepWeekValues[3]} hours slept</p>
+        <p>${sleepWeekKeys[4]}: ${sleepWeekValues[4]} hours slept</p>
+        <p>${sleepWeekKeys[5]}: ${sleepWeekValues[5]} hours slept</p>
+        <p>${sleepWeekKeys[6]}: ${sleepWeekValues[6]} hours slept</p>
+        <p>${qualityWeekKeys[0]}: ${qualityWeekValues[0]} sleep quality</p>
+        <p>${qualityWeekKeys[1]}: ${qualityWeekValues[1]} sleep quality</p>
+        <p>${qualityWeekKeys[2]}: ${qualityWeekValues[2]} sleep quality</p>
+        <p>${qualityWeekKeys[3]}: ${qualityWeekValues[3]} sleep quality</p>
+        <p>${qualityWeekKeys[4]}: ${qualityWeekValues[4]} sleep quality</p>
+        <p>${qualityWeekKeys[5]}: ${qualityWeekValues[5]} sleep quality</p>
+        <p>${qualityWeekKeys[6]}: ${qualityWeekValues[6]} sleep quality</p>
       <li><b>All Time</b></li>
-        <p> hours slept</p>
-        <p> sleep quality</p>
+        <p>${allTimeSleep} hours slept</p>
+        <p>${allTimeSleepQuality} sleep quality</p>
 
     `
   })
