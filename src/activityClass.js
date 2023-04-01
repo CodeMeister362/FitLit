@@ -33,12 +33,20 @@ class Activity {
     const stepsOnly = specificDay.numSteps
     if (stepsOnly < dailyStepGoal) {
       const remainder = dailyStepGoal - stepsOnly
-      console.log(`You were ${remainder} steps below your goal of ${dailyStepGoal} steps!`)
-      return `You were ${remainder} steps below your goal of ${dailyStepGoal} steps!`
+      return `You walked ${specificDay.numSteps} today. Thats ${remainder} steps below your goal of ${dailyStepGoal} steps!`
     } else if (stepsOnly >= dailyStepGoal) {
-      console.log(`You hit your step goal! You walked ${stepsOnly} steps out of your goal of ${dailyStepGoal} steps`)
       return `You hit your step goal! You walked ${stepsOnly} steps out of your goal of ${dailyStepGoal} steps`
     }
+  }
+  overAWeek = (id, startDate, stopDate) => {
+    let activityData = []
+    const user = this.data.activityData.filter((item) => item.userID === id)
+    user.forEach((item) => {
+      if (item.date >= startDate && item.date <= stopDate)
+        activityData.push(item)
+    })
+    const activityObject = activityData.reduce((acc, item) => ({...acc, [item.date]: item.minutesActive}),{})
+    return activityObject
   }
 }
 
