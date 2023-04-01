@@ -1,6 +1,6 @@
 import { assert } from 'chai';
-import Water from '../src/hydrationClass'
-import data from '../src/data/hydrationmock'
+import Water from '../src/hydrationClass';
+import data from '../src/data/hydrationmock';
 
 describe('Hydration Class', () => {
 
@@ -14,15 +14,15 @@ it.skip('should be a function', function() {
 it.skip('should return the average ounces drank for a given user', function() {
 
 
-  assert.equal(waterData.averageOuncesPerDay(data, 1), 24)
+  assert.equal(waterData.averageOuncesPerDay( 1), 24)
 })
   it.skip('should return the amount drank based on specific day', function() {
 
-    assert.equal(waterData.getSpecificDay(data, 2, "2023/03/24"), 35)
+    assert.equal(waterData.getSpecificDay( 2, "2023/03/24"), 35)
   })
   it.skip('should return the amount of water drank each day over a week', function() {
 
-    assert.deepEqual(waterData.overAWeek(data, 1, "2023/03/24", "2023/03/26"), {
+    assert.deepEqual(waterData.overAWeek( 1, "2023/03/24", "2023/03/26"), {
       "2023/03/24" : 28,
       "2023/03/25" : 24,
       "2023/03/26" : 23
