@@ -11,13 +11,11 @@ import './images/wave.png';
 
 import * as apiCalls from './apiCalls'; 
 
-console.log('This is the JavaScript entry file - your code begins here.');
-
 // An example of how you tell webpack to use a JS file
 
 // import userData from './data/users';
 import UserRepository from './UserRepository';
-import Water from './hydrationClass.js';
+import Water from './hydrationClass';
 
 
   
@@ -42,12 +40,12 @@ import Water from './hydrationClass.js';
     const user = new UserRepository(data.users[randomNum].id, data.users[randomNum].name, data.users[randomNum].address, data.users[randomNum].email, data.users[randomNum].strideLength, data.users[randomNum].dailyStepGoal, data.users[randomNum].friends)
      console.log(user) 
     userCard.innerHTML = 
-  `<h3>Welcome ${user.getFirstName(user.id, data.users)}!</h3>
-   <ul>
-    <li>Your daily step goal is ${user.dailyStepGoal}</li>
-    <li>The average step goal of all FitLitFans is ${user.getAverageSteps(data.users)}</li>
-  </ul>`
-  });
+    `<h3>Welcome ${user.getFirstName(user.id, data.users)}!</h3>
+    <ul>
+      <li>Your daily step goal is ${user.dailyStepGoal}</li>
+      <li>The average step goal of all FitLitFans is ${user.getAverageSteps(data.users)}</li>
+    </ul>`
+    });
 
   apiCalls.fetchHydration().then(data => {
     //console.log(data.hydrationData)
@@ -63,6 +61,14 @@ import Water from './hydrationClass.js';
      <li>This is how many fluid ounces of water consumed each day over the course of a week..</li>
    </ul>`
   });
+
+  apiCalls.fetchSleep().then(data => {
+    console.log('sleep', data)
+  })
+
+  apiCalls.fetchActivity().then(data => {
+    console.log('activity', data)
+  })
 
   // fetch("https://fitlit-api.herokuapp.com/api/v1/sleep")
   // .then(response => response.json())
