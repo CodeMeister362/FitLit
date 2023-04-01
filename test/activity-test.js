@@ -117,7 +117,6 @@ describe('activity class', () => {
 			}]
 		})
 	})
-
 		it('should be a function', () => {
 
 			assert.isFunction(Activity)
