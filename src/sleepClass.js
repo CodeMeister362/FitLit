@@ -1,10 +1,6 @@
 class Sleep{
   constructor(data) {
     this.data = data;
-    // this.id = data.userID
-    // this.date = data.date
-    // this.hoursSlept = data.hoursSlept
-    // this.sleepQuality = data.sleepQuality
   }
   getAllTimeSleepAve(givenID) {
     let userHoursSlept = this.data.sampleSleep.filter((sleepObject) => sleepObject.userID === givenID)
@@ -58,7 +54,6 @@ class Sleep{
     return sleepQualityWeek.reduce((acc, item) => ({...acc, [item.date]: item.sleepQuality}), {});
   }
 };
-
 
 export default Sleep;
 
