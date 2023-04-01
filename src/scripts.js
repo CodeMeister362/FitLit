@@ -16,6 +16,8 @@ import * as apiCalls from './apiCalls';
 // import userData from './data/users';
 import UserRepository from './UserRepository';
 import Water from './hydrationClass';
+import Sleep from './sleepClass';
+
 
 
   
@@ -30,15 +32,20 @@ import Water from './hydrationClass';
     function getRandomInt() {
       return Math.floor(Math.random() * 50);
     }
-    
     const randomNum = getRandomInt();
+    let person;
+ 
+    // const today = new Date();
+    // const options = { day: '2-digit', month: '2-digit', year: 'numeric' };
+    // const todaysDate = today.toLocaleDateString('fr-CA', options).replace(/-/g, '/');
+
 
   apiCalls.fetchUsers().then(data => {
-
+    person = data.users[randomNum];
     const userCard = document.querySelector('.user-card');
     console.log(data.users)
     const user = new UserRepository(data.users[randomNum].id, data.users[randomNum].name, data.users[randomNum].address, data.users[randomNum].email, data.users[randomNum].strideLength, data.users[randomNum].dailyStepGoal, data.users[randomNum].friends)
-     console.log(user) 
+
     userCard.innerHTML = 
     `<h3>Welcome ${user.getFirstName(user.id, data.users)}!</h3>
     <ul>
@@ -51,7 +58,7 @@ import Water from './hydrationClass';
     //console.log(data.hydrationData)
     const waterCard = document.querySelector('.water-card')
 
-    const userWater = new Water(data.hydrationData[randomNum])
+    const userWater = new Water(data)
     console.log('water', userWater)
     waterCard.innerHTML =
   `<h3>Hydration info</h3>
@@ -63,7 +70,35 @@ import Water from './hydrationClass';
   });
 
   apiCalls.fetchSleep().then(data => {
-    console.log('sleep', data)
+    const sleepCard = document.querySelector('.sleep-card')
+    const display = { day: '2-digit', month: '2-digit', year: 'numeric' };
+    const todayDate = new Date().toLocaleDateString('fr-CA', display).replace(/-/g, '/');
+    const aWeekEarlier = new Date(new Date().setDate(new Date().getDate() - 7)).toLocaleDateString('fr-CA', display).replace(/-/g, '/')
+
+  
+    const userSleep = new Sleep(data);
+
+    const sleepDay = userSleep.getHoursByDay(1, todayDate);
+    const dayQuality = userSleep.getSleepQualityByDay(1, todayDate)
+    const sleepWeek = userSleep.getHoursSleptByWeek(1, todayDate, aWeekEarlier);
+    const qualityWeek = userSleep.getSleepQualitytByWeek(1, todayDate, aWeekEarlier);
+    console.log(qualityWeek)
+    const qualityWeekKeys = Object.keys(qualityWeek);
+    console.log("This is sleepWeek:", sleepWeek)
+    sleepCard.innerHTML = 
+    `<h3>Your Sleep</h3>
+    <ul>
+      <li><b>Last Night</b>
+        <p>${sleepDay} hours slept</p>
+        <p>${dayQuality} sleep quality</p>
+      <li><b>Last Week</b></li>
+        <p>${sleepWeek} hours slept</p>
+        <p>${qualityWeekKeys} sleep quality</p>
+      <li><b>All Time</b></li>
+        <p> hours slept</p>
+        <p> sleep quality</p>
+
+    `
   })
 
   apiCalls.fetchActivity().then(data => {
