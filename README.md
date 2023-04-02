@@ -8,7 +8,7 @@ FitLit is an app that tracks a given user's data in relation to their goals. Fit
 ### Installation Instructions:
 [//]: <> (What steps does a person have to take to get your app cloned down and running?)
 1. Fork and clone this repo.
-2. Type `cd FitLit` to move into the root directory
+2. Run `cd FitLit` to move into the root directory
 3. Run `npm install` to install necessary dependencies.
 4. Run `npm start` to start the local server and run the application.
 5. The terminal will display 'Project is running at [URL] '. Use link displayed in the terminal to view the application in browser.
