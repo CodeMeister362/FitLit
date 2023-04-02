@@ -26,10 +26,10 @@ This application was completed as a group project for the Front-End software dev
 
 ### Contributors:
 [//]: <> (Who worked on this application? Link to their LinkedIn.)
-- [Nathan Chamberlain] (https://www.linkedin.com/in/chamberlainux/)
+- [Nathan Chamberlain](https://www.linkedin.com/in/chamberlainux/)
 - [Priscilla Paxton](https://www.linkedin.com/in/priscilla-paxton-9175bb199/)
 - [Carol Bradsen](https://www.linkedin.com/in/carol-bradsen/)
-- [Race Osuna] (https://www.linkedin.com/in/race-osuna-17a827267/)
+- [Race Osuna](https://www.linkedin.com/in/race-osuna-17a827267/)
 
 
 ### Learning Goals:
