@@ -34,12 +34,9 @@ import Sleep from './sleepClass';
       return Math.floor(Math.random() * 50);
     }
     const randomNum = getRandomInt();
+    const idRandom = randomNum - 1;
     let person;
  
-    // const today = new Date();
-    // const options = { day: '2-digit', month: '2-digit', year: 'numeric' };
-    // const todaysDate = today.toLocaleDateString('fr-CA', options).replace(/-/g, '/');
-
 
   apiCalls.fetchUsers().then(data => {
     person = data.users[randomNum];
@@ -57,24 +54,19 @@ import Sleep from './sleepClass';
 
   apiCalls.fetchHydration().then(data => {
     const waterCard = document.querySelector('.water-card')
-    
     const userWater = new Water(data)
-
     const display = { day: '2-digit', month: '2-digit', year: 'numeric' };
     const todayDate = new Date().toLocaleDateString('fr-CA', display).replace(/-/g, '/');
     const aWeekEarlier = new Date(new Date().setDate(new Date().getDate() - 7)).toLocaleDateString('fr-CA', display).replace(/-/g, '/')
-
-    const overAWeekObject = userWater.overAWeek(46, aWeekEarlier, todayDate) 
-    console.log(userWater.overAWeek(46, aWeekEarlier, todayDate) )
-    console.log(overAWeekObject)
+    const overAWeekObject = userWater.overAWeek(idRandom, aWeekEarlier, todayDate) 
     const hydrationWeekKeys = Object.keys(overAWeekObject)
     const hydrationWeekValues = Object.values(overAWeekObject)
 
     waterCard.innerHTML =
-  `<h3>Hydration info</h3>
+  `<h3>Your Hydration</h3>
    <ul>
-     <li>Your average fluid ounces consumed per day is ${userWater.averageOuncesPerDay(1)}</li>
-     <li>you drank ${userWater.getSpecificDay(46, todayDate)} ounces today</li>
+     <li>Your average fluid ounces consumed per day is ${userWater.averageOuncesPerDay(idRandom)}</li>
+     <li>You drank ${userWater.getSpecificDay(idRandom, todayDate)} ounces today</li>
      <p>On ${hydrationWeekKeys[0]} you drank ${hydrationWeekValues[0]} ounces of water</p>
      <p>On ${hydrationWeekKeys[1]} you drank ${hydrationWeekValues[1]} ounces of water</p>
      <p>On ${hydrationWeekKeys[2]} you drank ${hydrationWeekValues[2]} ounces of water</p>
@@ -91,22 +83,18 @@ import Sleep from './sleepClass';
     const display = { day: '2-digit', month: '2-digit', year: 'numeric' };
     const todayDate = new Date().toLocaleDateString('fr-CA', display).replace(/-/g, '/');
     const aWeekEarlier = new Date(new Date().setDate(new Date().getDate() - 7)).toLocaleDateString('fr-CA', display).replace(/-/g, '/')
-
-  
     const userSleep = new Sleep(data);
-
-    const sleepDay = userSleep.getHoursByDay(1, todayDate);
-    const dayQuality = userSleep.getSleepQualityByDay(1, todayDate)
-    const sleepWeek = userSleep.getHoursSleptByWeek(1, aWeekEarlier, todayDate);
-    const qualityWeek = userSleep.getSleepQualitytByWeek(1, aWeekEarlier, todayDate,);
+    const sleepDay = userSleep.getHoursByDay(idRandom, todayDate);
+    const dayQuality = userSleep.getSleepQualityByDay(idRandom, todayDate)
+    const sleepWeek = userSleep.getHoursSleptByWeek(idRandom, aWeekEarlier, todayDate);
+    const qualityWeek = userSleep.getSleepQualitytByWeek(idRandom, aWeekEarlier, todayDate,);
     const sleepWeekKeys = Object.keys(sleepWeek)
     const sleepWeekValues = Object.values(sleepWeek)
     const qualityWeekKeys = Object.keys(qualityWeek);
     const qualityWeekValues = Object.values(qualityWeek);
-    const allTimeSleep = userSleep.getAllTimeSleepAve(1);
-    const allTimeSleepQuality = userSleep.getAllTimeQualityAve(1);
+    const allTimeSleep = userSleep.getAllTimeSleepAve(idRandom);
+    const allTimeSleepQuality = userSleep.getAllTimeQualityAve(idRandom);
 
-    console.log("This is sleepWeek:", sleepWeek)
     sleepCard.innerHTML = 
     `<h3>Your Sleep</h3>
     <ul>
@@ -131,52 +119,17 @@ import Sleep from './sleepClass';
       <li><b>All Time</b></li>
         <p>${allTimeSleep} hours slept</p>
         <p>${allTimeSleepQuality} sleep quality</p>
-
+    </ul>
     `
   })
 
   apiCalls.fetchActivity().then(data => {
     console.log('activity', data)
   })
-
-  // fetch("https://fitlit-api.herokuapp.com/api/v1/sleep")
-  // .then(response => response.json())
-  // .then(data => {
-    
-  //   const sleepCard = document.querySelector('.sleep-card)
-
-  //   const userSleep = new sleep(data.sleepData[randomNum])
-
-  //   sleepCard.innerHTML = 
-  // `<h3>Sleep Info</h3>
-  //  <ul>
-  //    <li>Your sleep</li>
-  //    <li>This sleep</li>
-  //    <li>This sleep</li>
-  //  </ul>`
-  // });
-
-  // fetch("https://fitlit-api.herokuapp.com/api/v1/activity")
-  // .then(response => response.json())
-  // .then(data => {
-    
-  //   const activityCard = document.querySelector('.activity-card')
-
-  //   const userWater = new activity(data.activityData[randomNum])
-
-  //   activityCard.innerHTML = 
-  // `<h3>Activity info</h3>
-  //  <ul>
-  //    <li>Your so active</li>
-  //    <li>Your so active</li>
-  //    <li>Your so active</li>
-  //  </ul>`
-  // });
 })
     apiCalls.fetchUsers().then(userData => {
       apiCalls.fetchActivity().then(activitydata => {
         const activityCard = document.querySelector('.step-card')
-        
         const userActivity = new Activity(activitydata, userData)
 
         const display = { day: '2-digit', month: '2-digit', year: 'numeric' };
@@ -188,9 +141,9 @@ import Sleep from './sleepClass';
         const activityWeekValues = Object.values(activityWeekObject)
         
         activityCard.innerHTML = 
-        `<h3>Activity info</h3>
+        `<h3>Your Activity</h3>
         <ul>
-        <li>You have walked ${userActivity.getMilesWalked(46, todayDate)} miles today</li>
+        <li>You have walked ${userActivity.getMilesWalked(46, todayDate)} miles today.</li>
         <li>You've been active for ${userActivity.getMinutesActive(46, todayDate)} minutes today!</li>
         <li>${userActivity.determineReachGoal(46, todayDate)}</li>
         <p>On ${activityWeekKeys[0]} you were active for ${activityWeekValues[0]} minutes</p>
@@ -202,11 +155,5 @@ import Sleep from './sleepClass';
         <p>On ${activityWeekKeys[6]} you were active for ${activityWeekValues[6]} minutes</p>
         </ul>`
       })
-    })
+    });
 
-
-    //overaweek(randomID, startDate= today.now, enddate= starddate - 7days)
-    apiCalls.fetchSleep().then(data => {
-      // console.log('sleep', data)
-    })
-  })

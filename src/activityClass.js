@@ -33,9 +33,9 @@ class Activity {
     const stepsOnly = specificDay.numSteps
     if (stepsOnly < dailyStepGoal) {
       const remainder = dailyStepGoal - stepsOnly
-      return `You walked ${specificDay.numSteps} today. Thats ${remainder} steps below your goal of ${dailyStepGoal} steps!`
+      return `You walked ${specificDay.numSteps} today. That's ${remainder} steps below your goal of ${dailyStepGoal} steps.`
     } else if (stepsOnly >= dailyStepGoal) {
-      return `You hit your step goal! You walked ${stepsOnly} steps out of your goal of ${dailyStepGoal} steps`
+      return `You hit your step goal! You walked ${stepsOnly} steps out of your goal of ${dailyStepGoal} steps!`
     }
   }
   overAWeek = (id, startDate, stopDate) => {
