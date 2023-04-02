@@ -1,78 +1,37 @@
-# FitLit Starter Kit
+# FitLit
 
-The details of this project are outline in [this project spec](http://frontend.turing.io/projects/fitlit.html).
-
-## Setup
-
-1. Within your group, decide on one person to have the project repository (repo) on their GitHub account. Then, that person should fork this repo - on the top right corner of this page, click the **Fork** button.
-1. Both memebers of the group should clone down the _forked_ repo. Since you don't want to name your project "activity-tracker-starter", you can use an optional argument when you run git clone (you replace the [...] with the terminal command arguments): `git clone [remote-address] [what you want to name the repo]`
-1. Once you have cloned the repo, change into the directory and install the project dependencies. Run `npm install` to install project dependencies.
-1. Run `npm start` in the terminal to see the HTML page (you should see some boilerplate HTML displayed on the page).  `Control + C` is the command to stop running the local server.  Closing the terminal without stopping the server first could allow the server to continue to run in the background and cause problems. This command is not specific to Webpack; make note of it for future use.   
-1. Make sure both members of your team are collaborators on the forked repo.  
-1. Do not run `npm audit fix --force`.  This will update to the latest version of packages.  We need to be using `webpack-dev-server@3.11.2` which is not the latest version.  If you start to run into Webpack errors, first check that all group members are using the correct version.  
-
-## Testing
-
-There is no boilerplate for testing in this starter-kit repo. You will need to set this up yourself. However, if you ran `npm install`, then the tooling you need to start testing is already installed (`mocha` and `chai`).
+### Abstract:
+[//]: <> (Briefly describe what you built and its features. What problem is the app solving? How does this application solve that problem?)
+FitLit is an app that tracks a given user's data in relation to their goals. Fitbit displays daily and weekly data of the user's hydration, sleep, and activity statistics. 
 
 
-## Data Model
+### Installation Instructions:
+[//]: <> (What steps does a person have to take to get your app cloned down and running?)
+1. Fork and clone this repo.
+2. Type `cd FitLit` to move into the root directory
+3. Run `npm install` to install necessary dependencies.
+4. Run `npm start` to start the local server and run the application.
+5. The terminal will display 'Project is running at [URL] '. Use link displayed in the terminal to view the application in browser.
+6. Run `ctrl+c` to stop the local server and exit the application.
 
-**Users**
 
-```
-[
-  {
-    "id": [number],
-    "name": [string],
-    "address": [string],
-    "email": [string],
-    "strideLength": [number - feet],
-    "dailyStepGoal": [number - steps],
-    "friends": [array - one-way connection to other user(s)]
-  },
-  ...more user data
-]
-```
+### Preview of App:
+[//]: <> (Provide ONE gif or screenshot of your application - choose the "coolest" piece of functionality to show off.)
 
-**Activity**
 
-```
-[
-  {
-    "userID": [number],
-    "date": [string YYYY/MM/DD],
-    "numSteps": [number - steps],
-    "minutesActive": [number - minutes],
-    "flightsOfStairs": [number - flights]
-  },
-  ...more activity data
-]
-```
+### Context:
+[//]: <> (Give some context for the project here. How long did you have to work on it? How far into the Turing program are you?)
+This application was completed as a group project for the Front-End software development program at Turing. We were approximately 10 weeks into the program when we started working on this project.
 
-**Hydration**
 
-```
-[
-  {
-    "userID": [number],
-    "date": [string YYYY/MM/DD],
-    "numOunces": [number - ounces]
-  },
-  ...more hydration data
-]
-```
+### Contributors:
+[//]: <> (Who worked on this application? Link to their LinkedIn.)
+- [Nathan Chamberlain] (https://www.linkedin.com/in/chamberlainux/)
+- [Priscilla Paxton](https://www.linkedin.com/in/priscilla-paxton-9175bb199/)
+- [Carol Bradsen](https://www.linkedin.com/in/carol-bradsen/)
+- [Race Osuna] (https://www.linkedin.com/in/race-osuna-17a827267/)
 
-**Sleep**
 
-```
-[
-  {
-    "userID": [number],
-    "date": [string YYYY/MM/DD],
-    "hoursSlept": [number - hours],
-    "sleepQuality": [number - unitless]
-  },
-  ...more sleep data
-]
-```
+### Learning Goals:
+[//]: <> (What were the learning goals of this project? What tech did you work with?)
+This application utilizes object-oriented programming to display relevant data of a given user's health profile. Data for the application is sourced externally and the application leverages multiple API calls to retrieve and process the data. It is written with JavaScript, HTML, and CSS. The basic architecture of this application are class files that orient a given data set. Each class has unique methods that format each data set to be more readable to the user. Test-driven development was followed to ensure each method was resiliant. 
