@@ -22,7 +22,7 @@ body {
   grid-template-columns: 1fr 1fr 1fr 1fr;
   justify-content: center;
   grid-gap: 5rem;
-  padding-top: 7%;
+  padding-top: 2%;
   padding-bottom: 7%;
 }
 
@@ -37,6 +37,7 @@ body {
   
   color: white;
   border: solid #0000;
+  padding-right: 2em;
   border-width: var(--b) var(--b) var(--_s) var(--_s);
   background:
     conic-gradient(at left var(--d)  bottom var(--d),
