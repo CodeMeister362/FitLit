@@ -19,14 +19,14 @@ class Water{
   }
 
   overAWeek = (id, startDate, stopDate) => {
-      let waterData = []
-      const user = this.data.hydrationData.filter((item) => item.userID === id)
-      user.forEach((item) => {
-        if (item.date >= startDate && item.date <= stopDate)
-          waterData.push(item)
-      })
-      return waterData.reduce((acc, item) => ({...acc, [item.date]: item.numOunces}),{})
-    }
+    let waterData = []
+    const user = this.data.hydrationData.filter((item) => item.userID === id)
+    user.forEach((item) => {
+      if (item.date >= startDate && item.date <= stopDate)
+        waterData.push(item)
+    })
+    return waterData.reduce((acc, item) => ({...acc, [item.date]: item.numOunces}),{})
+  }
   }
 
 export default Water;
