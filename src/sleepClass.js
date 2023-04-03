@@ -4,8 +4,9 @@ class Sleep{
   }
   getAllTimeSleepAve(givenID) {
     let userHoursSlept = this.data.sleepData.filter((sleepObject) => sleepObject.userID === givenID)
-    let average = userHoursSlept.reduce((acc, currentDay) => {
-      acc += currentDay.hoursSlept / userHoursSlept.length
+    let average = userHoursSlept.reduce((acc, eachDay) => {
+      const totalHours = eachDay.hoursSlept;
+      acc += (totalHours / userHoursSlept.length)
       return acc
     }, 0)
     return Math.round(average);

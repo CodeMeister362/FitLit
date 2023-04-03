@@ -70,7 +70,6 @@ import Sleep from './sleepClass';
      <p>On ${hydrationWeekKeys[0]} you drank ${hydrationWeekValues[0]} ounces of water</p>
      <p>On ${hydrationWeekKeys[1]} you drank ${hydrationWeekValues[1]} ounces of water</p>
      <p>On ${hydrationWeekKeys[2]} you drank ${hydrationWeekValues[2]} ounces of water</p>
-     <p>On ${hydrationWeekKeys[2]} you drank ${hydrationWeekValues[2]} ounces of water</p>
      <p>On ${hydrationWeekKeys[3]} you drank ${hydrationWeekValues[3]} ounces of watrer</p>
      <p>On ${hydrationWeekKeys[4]} you drank ${hydrationWeekValues[4]} ounces of water</p>
      <p>On ${hydrationWeekKeys[5]} you drank ${hydrationWeekValues[5]} ounces of water</p>
@@ -78,12 +77,13 @@ import Sleep from './sleepClass';
    </ul>`
   });
 
-  apiCalls.fetchSleep().then(data => {
-    const sleepCard = document.querySelector('.sleep-card')
+  apiCalls.fetchSleep()
+   .then((data) => {
+    const userSleep = new Sleep(data);
+    const sleepCard = document.querySelector('.sleep-card');
     const display = { day: '2-digit', month: '2-digit', year: 'numeric' };
     const todayDate = new Date().toLocaleDateString('fr-CA', display).replace(/-/g, '/');
     const aWeekEarlier = new Date(new Date().setDate(new Date().getDate() - 7)).toLocaleDateString('fr-CA', display).replace(/-/g, '/')
-    const userSleep = new Sleep(data);
     const sleepDay = userSleep.getHoursByDay(idRandom, todayDate);
     const dayQuality = userSleep.getSleepQualityByDay(idRandom, todayDate)
     const sleepWeek = userSleep.getHoursSleptByWeek(idRandom, aWeekEarlier, todayDate);
@@ -94,6 +94,8 @@ import Sleep from './sleepClass';
     const qualityWeekValues = Object.values(qualityWeek);
     const allTimeSleep = userSleep.getAllTimeSleepAve(idRandom);
     const allTimeSleepQuality = userSleep.getAllTimeQualityAve(idRandom);
+
+ 
 
     sleepCard.innerHTML = 
     `<h3>Your Sleep</h3>
@@ -121,12 +123,16 @@ import Sleep from './sleepClass';
         <p>${allTimeSleepQuality} sleep quality</p>
     </ul>
     `
-  })
+   })
+ .catch((error) => {
+    console.error('Error fetching sleep data:', error);
+ });
+
+  });
 
   apiCalls.fetchActivity().then(data => {
     console.log('activity', data)
   })
-})
     apiCalls.fetchUsers().then(userData => {
       apiCalls.fetchActivity().then(activitydata => {
         const activityCard = document.querySelector('.step-card')
