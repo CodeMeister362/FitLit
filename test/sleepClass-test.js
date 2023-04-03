@@ -44,11 +44,10 @@ describe("Sleep Class", () => {
   });
 
   it("should take in a specific day and return the users sleep quality for that date", () => {
-    assert.equal(sleepData.getSleepQualityByDay(2, "2023/03/24"), 3.5)
+    assert.equal(mockSleep.getSleepQualityByDay(2, "2023/03/24"), 3.5)
   });
 
-  assert.equal(mockSleep.getSleepQualityByDay(2, "2023/03/24"), 3.5)
-  })
+
 
 it("should return sleep quality for each day over 7 days", function() {
     assert.deepEqual(mockSleep.getSleepQualitytByWeek(1, "2023/03/24", "2023/03/30"), {
@@ -61,4 +60,4 @@ it("should return sleep quality for each day over 7 days", function() {
     "2023/03/30" : 3.3,
     })
   });
-
+});

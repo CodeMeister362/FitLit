@@ -1,22 +1,12 @@
 class Sleep{
   constructor(data) {
     this.data = data;
-<<<<<<< HEAD
   }
   getAllTimeSleepAve(givenID) {
     let userHoursSlept = this.data.sleepData.filter((sleepObject) => sleepObject.userID === givenID)
     let average = userHoursSlept.reduce((acc, eachDay) => {
       const totalHours = eachDay.hoursSlept;
       acc += (totalHours / userHoursSlept.length)
-=======
-  };
-
-  getAllTimeSleepAve = (givenID) => {
-    let userHoursSlept = this.data.sleepData.filter((sleepObject) => 
-      sleepObject.userID === givenID);
-    let average = userHoursSlept.reduce((acc, currentDay) => {
-      acc += currentDay.hoursSlept / userHoursSlept.length
->>>>>>> main
       return acc
     }, 0);
     return Math.round(average);
@@ -39,8 +29,8 @@ class Sleep{
     };
 
   getSleepQualityByDay = (givenID, date) => {
-    let sleepQuality = this.data.sleepData.filter((sleepdata) => 
-      sleepdata.userID === givenID && sleepdata.date === date);
+    let sleepQuality = this.data.sleepData.filter((sdata) => 
+      sdata.userID === givenID && sdata.date === date);
       return sleepQuality[0].sleepQuality;
     };
 
