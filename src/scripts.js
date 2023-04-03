@@ -80,12 +80,13 @@ window.addEventListener("load", () => {
       </ul>`
   });
 
-  apiCalls.fetchSleep().then((data) => {
+  apiCalls.fetchSleep()
+   .then((data) => {
+    const userSleep = new Sleep(data);
     const sleepCard = document.querySelector('.sleep-card');
     const display = { day: '2-digit', month: '2-digit', year: 'numeric' };
     const todayDate = new Date().toLocaleDateString('fr-CA', display).replace(/-/g, '/');
-    const aWeekEarlier = new Date(new Date().setDate(new Date().getDate() - 7)).toLocaleDateString('fr-CA', display).replace(/-/g, '/');
-    const userSleep = new Sleep(data);
+    const aWeekEarlier = new Date(new Date().setDate(new Date().getDate() - 7)).toLocaleDateString('fr-CA', display).replace(/-/g, '/')
     const sleepDay = userSleep.getHoursByDay(idRandom, todayDate);
     const dayQuality = userSleep.getSleepQualityByDay(idRandom, todayDate);
     const sleepWeek = userSleep.getHoursSleptByWeek(idRandom, aWeekEarlier, todayDate);
@@ -97,33 +98,40 @@ window.addEventListener("load", () => {
     const allTimeSleep = userSleep.getAllTimeSleepAve(idRandom);
     const allTimeSleepQuality = userSleep.getAllTimeQualityAve(idRandom);
 
+ 
+
     sleepCard.innerHTML = 
-      `<h3>Your Sleep</h3>
-      <ul>
-        <li><b>Last Night</b>
-          <p>${sleepDay} hours slept</p>
-          <p>${dayQuality} sleep quality</p>
-        <li><b>Last Week</b></li>
-          <p>${sleepWeekKeys[0]}: ${sleepWeekValues[0]} hours slept</p>
-          <p>${sleepWeekKeys[1]}: ${sleepWeekValues[1]} hours slept</p>
-          <p>${sleepWeekKeys[2]}: ${sleepWeekValues[2]} hours slept</p>
-          <p>${sleepWeekKeys[3]}: ${sleepWeekValues[3]} hours slept</p>
-          <p>${sleepWeekKeys[4]}: ${sleepWeekValues[4]} hours slept</p>
-          <p>${sleepWeekKeys[5]}: ${sleepWeekValues[5]} hours slept</p>
-          <p>${sleepWeekKeys[6]}: ${sleepWeekValues[6]} hours slept</p>
-          <p>${qualityWeekKeys[0]}: ${qualityWeekValues[0]} sleep quality</p>
-          <p>${qualityWeekKeys[1]}: ${qualityWeekValues[1]} sleep quality</p>
-          <p>${qualityWeekKeys[2]}: ${qualityWeekValues[2]} sleep quality</p>
-          <p>${qualityWeekKeys[3]}: ${qualityWeekValues[3]} sleep quality</p>
-          <p>${qualityWeekKeys[4]}: ${qualityWeekValues[4]} sleep quality</p>
-          <p>${qualityWeekKeys[5]}: ${qualityWeekValues[5]} sleep quality</p>
-          <p>${qualityWeekKeys[6]}: ${qualityWeekValues[6]} sleep quality</p>
-        <li><b>All Time</b></li>
-          <p>${allTimeSleep} hours slept</p>
-          <p>${allTimeSleepQuality} sleep quality</p>
-      </ul>`
+    `<h3>Your Sleep</h3>
+    <ul>
+      <li><b>Last Night</b>
+        <p>${sleepDay} hours slept</p>
+        <p>${dayQuality} sleep quality</p>
+      <li><b>Last Week</b></li>
+        <p>${sleepWeekKeys[0]}: ${sleepWeekValues[0]} hours slept</p>
+        <p>${sleepWeekKeys[1]}: ${sleepWeekValues[1]} hours slept</p>
+        <p>${sleepWeekKeys[2]}: ${sleepWeekValues[2]} hours slept</p>
+        <p>${sleepWeekKeys[3]}: ${sleepWeekValues[3]} hours slept</p>
+        <p>${sleepWeekKeys[4]}: ${sleepWeekValues[4]} hours slept</p>
+        <p>${sleepWeekKeys[5]}: ${sleepWeekValues[5]} hours slept</p>
+        <p>${sleepWeekKeys[6]}: ${sleepWeekValues[6]} hours slept</p>
+        <p>${qualityWeekKeys[0]}: ${qualityWeekValues[0]} sleep quality</p>
+        <p>${qualityWeekKeys[1]}: ${qualityWeekValues[1]} sleep quality</p>
+        <p>${qualityWeekKeys[2]}: ${qualityWeekValues[2]} sleep quality</p>
+        <p>${qualityWeekKeys[3]}: ${qualityWeekValues[3]} sleep quality</p>
+        <p>${qualityWeekKeys[4]}: ${qualityWeekValues[4]} sleep quality</p>
+        <p>${qualityWeekKeys[5]}: ${qualityWeekValues[5]} sleep quality</p>
+        <p>${qualityWeekKeys[6]}: ${qualityWeekValues[6]} sleep quality</p>
+      <li><b>All Time</b></li>
+        <p>${allTimeSleep} hours slept</p>
+        <p>${allTimeSleepQuality} sleep quality</p>
+    </ul>
+    `
+   })
+ .catch((error) => {
+    console.error('Error fetching sleep data:', error);
+ });
+
   });
-});
 
 apiCalls.fetchUsers().then((userData) => {
   apiCalls.fetchActivity().then((activitydata) => {

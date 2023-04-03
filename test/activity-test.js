@@ -131,7 +131,7 @@ describe('activity class', () => {
 		}); 
 
 		it('should tell user if they have met their step goal for the day', () => {
-			assert.equal(activity.determineReachGoal(2, "2023/03/24"),'You were 5951 steps below your goal of 9000 steps!')
-			assert.equal(activity.determineReachGoal(2, "2023/03/25"),'You hit your step goal! You walked 9000 steps out of your goal of 9000 steps')
+			assert.equal(activity.determineReachGoal(2, "2023/03/24"),`You walked 3049 today. That's 5951 steps below your goal of 9000 steps.`)
+			assert.equal(activity.determineReachGoal(2, "2023/03/25"),'You hit your step goal! You walked 9000 steps out of your goal of 9000 steps!')
 		});
 });
