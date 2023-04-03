@@ -115,27 +115,23 @@ describe('activity class', () => {
 						7
 					]
 			}]
-		})
-	})
-		it('should be a function', () => {
+		});
+	});
 
+		it('should be a function', () => {
 			assert.isFunction(Activity)
-		})
+		});
 
 		it('should return miles walked in day', () => {
-
 			assert.equal(activity.getMilesWalked(1, "2023/03/24"), .4647727272727273)
-		})
+		});
 
 		it('should return minutes active in a day', () => {
-
 			assert.equal(activity.getMinutesActive(2, "2023/03/24"), 125)
-		}) 
+		}); 
 
 		it('should tell user if they have met their step goal for the day', () => {
-
-
 			assert.equal(activity.determineReachGoal(2, "2023/03/24"),'You were 5951 steps below your goal of 9000 steps!')
 			assert.equal(activity.determineReachGoal(2, "2023/03/25"),'You hit your step goal! You walked 9000 steps out of your goal of 9000 steps')
-		})
-})
+		});
+});
