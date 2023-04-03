@@ -3,7 +3,6 @@ import Sleep from '../src/sleepClass';
 import sampleSleepData from './sleep-mock-data';
 
 
-<<<<<<< HEAD
 describe("Sleep Class", () => {
   let mockSleep;
  beforeEach(() => {
@@ -42,20 +41,6 @@ describe("Sleep Class", () => {
     "2023/03/29" : 5.6,
     "2023/03/30" : 6.2,
     })
-=======
-  let sleepData = new Sleep(sampleSleepData);
-
-  it("should calculate the ave hours a usser has slept for all time", () => {
-    assert.equal(sleepData.getAllTimeSleepAve(1), 7)
-  });
-
-  it("should calculate the average sleep quality for all time", () => {
-    assert.equal(sleepData.getAllTimeQualityAve(1), 4)
-  });
-
-  it("should take in a specific day and return the users hours slept for that date", () => {
-    assert.equal(sleepData.getHoursByDay(2, "2023/03/24"), 8.4)
->>>>>>> main
   });
 
   it("should take in a specific day and return the users sleep quality for that date", () => {
