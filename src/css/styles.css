@@ -29,7 +29,7 @@ body {
 }
 
 .cards {
-  width: 15vw;
+  width: fit-content;
   background-color: #220d8d;
   color: aliceblue;
   box-shadow: 10 10;
