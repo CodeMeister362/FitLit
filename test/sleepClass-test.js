@@ -28,6 +28,7 @@ describe("Sleep Class", () => {
   it("should take in a specific day and return the users sleep quality for that date", function() {
 
   assert.equal(mockSleep.getSleepQualityByDay("2023/03/24"), 4.3)
+  assert.equal(mockSleep.getSleepQualityByDay("2000/03/13"), "Date not found");
   })
 
 
@@ -41,12 +42,13 @@ describe("Sleep Class", () => {
     "2023/03/29" : 5.6,
     "2023/03/30" : 6.2,
     })
+    assert.deepEqual(mockSleep.getHoursSleptByWeek("2020/03/24", "2000/03/30"), "Dates not found.")
   });
 
 
 
 it("should return sleep quality for each day over 7 days", function() {
-    assert.deepEqual(mockSleep.getSleepQualitytByWeek(1, "2023/03/24", "2023/03/30"), {
+    assert.deepEqual(mockSleep.getSleepQualitytByWeek( "2023/03/24", "2023/03/30"), {
     "2023/03/24" : 4.3,
     "2023/03/25" : 3.3,
     "2023/03/26" : 3.1,
@@ -55,5 +57,6 @@ it("should return sleep quality for each day over 7 days", function() {
     "2023/03/29" : 2.1,
     "2023/03/30" : 3.3,
     })
+     assert.deepEqual(mockSleep.getSleepQualitytByWeek( "2020/03/24", "2020/03/30"), "Dates not found.")
   });
 });

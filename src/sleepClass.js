@@ -39,7 +39,7 @@ getAllTimeSleepAve() {
   };
 
   getSleepQualityByDay = (specificDate) => {
-    let qualityDay = this.userData.find(day => day.date === specificDate);
+    const qualityDay = this.userData.find(day => day.date === specificDate);
       if (qualityDay) {
         return qualityDay.sleepQuality;
       } else {
@@ -49,24 +49,34 @@ getAllTimeSleepAve() {
 
   getHoursSleptByWeek = (start, end) => {
 
-  let sleepHoursWeek = this.userData.filter(day => day.date >= start && day.date <= end )
-
-  return sleepHoursWeek
-   
-   
-    // return hoursWeek.reduce((acc, item) => ({...acc, [item.date]: item.hoursSlept}), {});
+   const datesByWeek = this.userData.reduce((acc, day) => {
+    if(day.date >= start && day.date <= end) {
+      acc[day.date] = day.hoursSlept
+    }
+    return acc
+  }, {})
+    if ( Object.keys(datesByWeek).length < 1 ) {
+      return "Dates not found."
+    } else {
+      return datesByWeek;
+    }
   };
 
-  getSleepQualitytByWeek = (givenID, start, end) => {
-   let sleepQualityWeek = [];
-   const user = this.data.sleepData.filter((item) => item.userID === givenID);
-   user.forEach((item) => {
-    if (item.date >= start && item.date <= end) {
-      sleepQualityWeek.push(item)
+
+  getSleepQualitytByWeek = (start, end) => {
+  
+   const sleepQualityWeek = this.userData.reduce((acc, day) => {
+    if(day.date >= start && day.date <= end) {
+      acc[day.date] = day.sleepQuality
     }
-   });
-    return sleepQualityWeek.reduce((acc, item) => ({...acc, [item.date]: item.sleepQuality}), {});
-  }
+    return acc
+   }, {})
+   if ( Object.keys(sleepQualityWeek).length < 2 ) {
+      return "Dates not found."
+    } else {
+      return sleepQualityWeek;
+    }
+  };
 };
 
 export default Sleep;
