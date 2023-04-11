@@ -8,8 +8,12 @@ class Sleep{
   
   
 getUserData() {
+  if(userID) {
  return this.data.sleepData.filter((sleepObject) => sleepObject.userID === this.userID);
+  } else {
+    return "This is not a valid user ID"
   }
+}
 
 getAllTimeSleepAve() {
   const totalHoursSlept = this.userData.reduce((acc, eachDay) => {
