@@ -1,48 +1,60 @@
 class Sleep{
-  constructor(data) {
+  constructor(data, userID) {
     this.data = data;
+    this.userID = userID;
+    this.userData = this.getUserData();
+   
   }
-  getAllTimeSleepAve(givenID) {
-    let userHoursSlept = this.data.sleepData.filter((sleepObject) => sleepObject.userID === givenID)
-    let average = userHoursSlept.reduce((acc, eachDay) => {
-      const totalHours = eachDay.hoursSlept;
-      acc += (totalHours / userHoursSlept.length)
-      return acc
+  
+  
+getUserData() {
+ return this.data.sleepData.filter((sleepObject) => sleepObject.userID === this.userID);
+  }
+
+getAllTimeSleepAve() {
+  const totalHoursSlept = this.userData.reduce((acc, eachDay) => {
+    acc += eachDay.hoursSlept;
+      return acc 
     }, 0);
-    return Math.round(average);
+    return Math.round(totalHoursSlept / this.userData.length);
   };
 
-  getAllTimeQualityAve = (givenID) => {
-    let allTimeQuality = this.data.sleepData.filter((sleepObject) => 
-      sleepObject.userID === givenID);
-    let alltimeAveQuality = allTimeQuality.reduce((acc, currentDay) => {
-      acc += currentDay.sleepQuality / allTimeQuality.length
+  getAllTimeQualityAve = () => {
+   
+    let alltimeQuality = this.userData.reduce((acc, currentDay) => {
+      acc += currentDay.sleepQuality;
       return acc
     }, 0);
-    return Math.round(alltimeAveQuality);
+    return Math.round(alltimeQuality / this.userData.length);
   };
 
-  getHoursByDay = (givenID, date) => {
-    let sleepDay = this.data.sleepData.filter((sldata) => 
-      sldata.userID === givenID && sldata.date === date);
-      return sleepDay[0].hoursSlept;
-    };
+  getHoursByDay(specificDate) {
+    let sleepDay = this.userData.find(day => day.date === specificDate);
+  
+    if (sleepDay) {
+      return sleepDay.hoursSlept;
+    } else {
+      return "Date not found"
+    } 
+  };
 
-  getSleepQualityByDay = (givenID, date) => {
-    let sleepQuality = this.data.sleepData.filter((sdata) => 
-      sdata.userID === givenID && sdata.date === date);
-      return sleepQuality[0].sleepQuality;
-    };
+  getSleepQualityByDay = (specificDate) => {
+    let qualityDay = this.userData.find(day => day.date === specificDate);
+      if (qualityDay) {
+        return qualityDay.sleepQuality;
+      } else {
+        return "Date not found"
+      } 
+  };
 
-  getHoursSleptByWeek = (givenID, start, end) => {
-   let hoursWeek = []
-   const user = this.data.sleepData.filter((item) => item.userID === givenID);
-   user.forEach((item) => {
-    if (item.date >= start && item.date <= end) {
-      hoursWeek.push(item)
-    }
-   });
-    return hoursWeek.reduce((acc, item) => ({...acc, [item.date]: item.hoursSlept}), {});
+  getHoursSleptByWeek = (start, end) => {
+
+  let sleepHoursWeek = this.userData.filter(day => day.date >= start && day.date <= end )
+
+  return sleepHoursWeek
+   
+   
+    // return hoursWeek.reduce((acc, item) => ({...acc, [item.date]: item.hoursSlept}), {});
   };
 
   getSleepQualitytByWeek = (givenID, start, end) => {

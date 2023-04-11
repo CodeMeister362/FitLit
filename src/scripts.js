@@ -20,10 +20,6 @@ import Sleep from './sleepClass';
   
 window.addEventListener("load", () => {
 
-  apiCalls.kanyeIsBatShitCrazy().then((data) => {
-    const ye = document.querySelector(".kanye")
-      ye.innerText = `"${data.quote}" -Ye`
-  });
 
   function getRandomInt() {
     return Math.floor(Math.random() * 50);
@@ -98,7 +94,6 @@ window.addEventListener("load", () => {
     const allTimeSleep = userSleep.getAllTimeSleepAve(idRandom);
     const allTimeSleepQuality = userSleep.getAllTimeQualityAve(idRandom);
 
- 
 
     sleepCard.innerHTML = 
     `<h3>Your Sleep</h3>
