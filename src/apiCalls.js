@@ -1,3 +1,4 @@
+
 export function fetchUsers() {
   return fetch("https://fitlit-api.herokuapp.com/api/v1/users")
     .then(response => response.json());
@@ -22,4 +23,3 @@ export function inspireQuotes() {
   return fetch("https://type.fit/api/quotes")
     .then(response => response.json())
 };
-

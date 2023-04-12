@@ -54,7 +54,10 @@ window.addEventListener("load", () => {
         <li>Your daily step goal is ${user.dailyStepGoal}</li>
         <li>The average step goal of all FitLitFans is ${user.getAverageSteps(data.users)}</li>
       </ul>`
-    });
+    })
+    .catch((error) => {
+    console.error('Error fetching user data:', error);
+ });
 
   apiCalls.fetchHydration().then((data) => {
     const waterCard = document.querySelector('.water-card');
@@ -111,26 +114,28 @@ window.addEventListener("load", () => {
       }
     });
   });
+   .catch((error) => {
+    console.error('Error fetching hydration data:', error);
+ });
 
   apiCalls.fetchSleep()
    .then((data) => {
-    const userSleep = new Sleep(data);
+    const userSleep = new Sleep(data, idRandom);
     const sleepCard = document.querySelector('.sleep-card');
     const display = { day: '2-digit', month: '2-digit', year: 'numeric' };
     const todayDate = new Date().toLocaleDateString('fr-CA', display).replace(/-/g, '/');
     const aWeekEarlier = new Date(new Date().setDate(new Date().getDate() - 7)).toLocaleDateString('fr-CA', display).replace(/-/g, '/')
-    const sleepDay = userSleep.getHoursByDay(idRandom, todayDate);
-    const dayQuality = userSleep.getSleepQualityByDay(idRandom, todayDate);
-    const sleepWeek = userSleep.getHoursSleptByWeek(idRandom, aWeekEarlier, todayDate);
-    const qualityWeek = userSleep.getSleepQualitytByWeek(idRandom, aWeekEarlier, todayDate,);
+    const sleepDay = userSleep.getHoursByDay(todayDate);
+    const dayQuality = userSleep.getSleepQualityByDay(todayDate);
+    const sleepWeek = userSleep.getHoursSleptByWeek(aWeekEarlier, todayDate);
+    const qualityWeek = userSleep.getSleepQualitytByWeek(aWeekEarlier, todayDate,);
     const sleepWeekKeys = Object.keys(sleepWeek);
     const sleepWeekValues = Object.values(sleepWeek);
     const qualityWeekKeys = Object.keys(qualityWeek);
     const qualityWeekValues = Object.values(qualityWeek);
-    const allTimeSleep = userSleep.getAllTimeSleepAve(idRandom);
-    const allTimeSleepQuality = userSleep.getAllTimeQualityAve(idRandom);
+    const allTimeSleep = userSleep.getAllTimeSleepAve();
+    const allTimeSleepQuality = userSleep.getAllTimeQualityAve();
 
- 
     sleepCard.innerHTML = 
     `<h3>Your Sleep</h3>
     <ul>
@@ -220,10 +225,6 @@ window.addEventListener("load", () => {
     console.error('Error fetching sleep data:', error);
  });
 
-
-
-
-
   apiCalls.fetchUsers().then((userData) => {
     apiCalls.fetchActivity().then((activitydata) => {
       const activityCard = document.querySelector('.activity-card');
@@ -282,4 +283,3 @@ window.addEventListener("load", () => {
     });
   });
 });
-
