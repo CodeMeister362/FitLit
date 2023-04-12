@@ -113,7 +113,7 @@ window.addEventListener("load", () => {
         }
       }
     });
-  });
+  })
    .catch((error) => {
     console.error('Error fetching hydration data:', error);
  });
@@ -279,7 +279,7 @@ window.addEventListener("load", () => {
             }
           }
         }
+      })
       });
     });
   });
-});

@@ -1,5 +1,8 @@
 import { assert } from 'chai';
 import Activity from '../src/activityClass';
+// import UserRepository from '../src/UserRepository';
+import activityMockData from '../src/data/activity-mock-data';
+import userMockData from '../src/data/user-mock-data';
 
 describe('activity class', () => {
 
@@ -7,131 +10,54 @@ describe('activity class', () => {
 	
 	beforeEach(() => {
 	
-			activity = new Activity({
-				"activityData": [
-				{
-				"userID": 1,
-				"date": "2023/03/24",
-				"numSteps": 7362,
-				"minutesActive": 261,
-				"flightsOfStairs": 26
-				},
-				{
-				"userID": 2,
-				"date": "2023/03/24",
-				"numSteps": 3049,
-				"minutesActive": 125,
-				"flightsOfStairs": 43
-				},
-				{
-				"userID": 3,
-				"date": "2023/03/24",
-				"numSteps": 12970,
-				"minutesActive": 282,
-				"flightsOfStairs": 38
-				},
-				{
-					"userID": 1,
-					"date": "2023/03/24",
-					"numSteps": 7362,
-					"minutesActive": 261,
-					"flightsOfStairs": 26
-					},
-					{
-					"userID": 2,
-					"date": "2023/03/25",
-					"numSteps": 9000,
-					"minutesActive": 125,
-					"flightsOfStairs": 43
-					},
-					{
-					"userID": 3,
-					"date": "2023/03/24",
-					"numSteps": 12970,
-					"minutesActive": 282,
-					"flightsOfStairs": 38
-					},
-					{
-						"userID": 1,
-						"date": "2023/03/24",
-						"numSteps": 7362,
-						"minutesActive": 261,
-						"flightsOfStairs": 26
-						},
-						{
-						"userID": 2,
-						"date": "2023/03/26",
-						"numSteps": 10000,
-						"minutesActive": 125,
-						"flightsOfStairs": 43
-						},
-						{
-						"userID": 3,
-						"date": "2023/03/24",
-						"numSteps": 12970,
-						"minutesActive": 282,
-						"flightsOfStairs": 38
-						}
-			]},
-				{ "users": [
-				{
-					"id": 1,
-					"name": "Trystan Gorczany",
-					"address": "9484 Lucas Flat, West Kittymouth WA 67504",
-					"email": "Taurean_Pollich31@gmail.com",
-					"strideLength": 4,
-					"dailyStepGoal": 7000,
-					"friends": [
-						5,
-						43,
-						46,
-						11
-					]
-				},
-				{
-					"id": 2,
-					"name": "Tyreek VonRueden",
-					"address": "623 Koelpin Skyway, Lake Luigichester MN 77576-1678",
-					"email": "Nicolette_Halvorson43@yahoo.com",
-					"strideLength": 4.5,
-					"dailyStepGoal": 9000,
-					"friends": [
-						13,
-						19,
-						3
-					]
-				},
-				{
-					"id": 3,
-					"name": "Colt Rohan",
-					"address": "48010 Balistreri Harbor, Cleobury IN 43317",
-					"email": "Wilford.Barton@gmail.com",
-					"strideLength": 2.7,
-					"dailyStepGoal": 3000,
-					"friends": [
-						31,
-						16,
-						15,
-						7
-					]
-			}]
-		});
-	});
+		activity = new Activity(activityMockData, userMockData)
 
+	})
 		it('should be a function', () => {
 			assert.isFunction(Activity)
 		});
 
-		it('should return miles walked in day', () => {
-			assert.equal(activity.getMilesWalked(1, "2023/03/24"), .4647727272727273)
+		it('should return the data from a specific day based on ID and date', () => {
+			assert.deepEqual(activity.getSpecificDayData(1, "2023/03/27"), 
+			{
+				"userID": 1,
+				"date": "2023/03/27",
+				"numSteps": 7362,
+				"minutesActive": 261,
+				"flightsOfStairs": 26
+				})
 		});
 
-		it('should return minutes active in a day', () => {
+		it('should check if a given date does or does not exist in the data set for the specific ID', () => {
+			assert.equal(activity.checkDateExists("2025/11/18"), false)
+			assert.equal(activity.checkDateExists("2023/03/25"), true)
+		});
+
+		it('should return miles walked in day based on if date exists in data', () => {
+			assert.equal(activity.getMilesWalked(1, "2023/03/24"), .5)
+			assert.equal(activity.getMilesWalked(1, "2027/03/24"), 'this day doesnt exist!')
+		});
+
+		it('should return minutes active in a day based on if date exists in data', () => {
 			assert.equal(activity.getMinutesActive(2, "2023/03/24"), 125)
+			assert.equal(activity.getMinutesActive(2, "2028/03/24"), 'this day doesnt exist!')
 		}); 
 
-		it('should tell user if they have met their step goal for the day', () => {
-			assert.equal(activity.determineReachGoal(2, "2023/03/24"),`You walked 3049 today. That's 5951 steps below your goal of 9000 steps.`)
-			assert.equal(activity.determineReachGoal(2, "2023/03/25"),'You hit your step goal! You walked 9000 steps out of your goal of 9000 steps!')
+		it('should tell user if they have met their step goal for the day if date exists in data', () => {
+			assert.equal(activity.determineReachGoal(2, "2023/03/24"),`You walked 3049 steps today. That's 5951 steps below your goal of 9000 steps.`)
+			assert.equal(activity.determineReachGoal(3, "2023/03/24"),'You walked 12970 steps today. Thats 9970 steps above your goal of 3000 steps!')
+			assert.equal(activity.determineReachGoal(3, "2026/03/24"),'this day doesnt exist!')
 		});
+
+		it('should return activity from a week if dates exist in data', () => {
+			assert.deepEqual(activity.overAWeek(1, "2023/03/24", "2023/03/27"), 
+			{
+				'2023/03/24': 261,
+				'2023/03/25': 261,
+				'2023/03/26': 261,
+				'2023/03/27': 261
+			})
+			assert.equal(activity.overAWeek(1, "2028/03/24", "2028/03/27"), 'wrongDates!')
+		}); 
 });
+

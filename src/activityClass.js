@@ -1,57 +1,83 @@
 class Activity {
-  constructor(data, userData) {
-    this.data = data
-    this.userData = userData
+  constructor(activityData, userData) {
+    this.activity = activityData
+    this.data = userData
   };
+
+  getSpecificDayData = (givenId, date) => {
+    return this.activity.activityData.find((data) => {
+      return data.userID === givenId && data.date === date
+    })
+  }
+
+  checkDateExists = (date) => {
+    return this.activity.activityData.some((data) => {
+      return data.date === date 
+  })
+}
 
   getMilesWalked = (givenId, date) => {
-    const userID = this.userData.users.find((userSpecific) => {
-      return userSpecific.id === givenId
-    });
-    const userStrideLength = userID.strideLength
-    const milesInADay = this.data.activityData.find((person) => {
-      return person.userID === givenId && person.date === date
-    });
-    let stepsOnly = milesInADay.numSteps
-      stepsOnly = (stepsOnly * userStrideLength) / 63360
-        return stepsOnly
-  };
+    if(this.checkDateExists(date)) {
+      const specificUser = this.data.userData.find((user) => {
+        return user.id === givenId
+      }) 
+      const specificUserStrideLength = specificUser.strideLength
+      
+      const specificDaySteps = this.getSpecificDayData(givenId, date).numSteps
+      return Math.round((specificDaySteps * specificUserStrideLength / 63360) * 10) / 10
+    } else {
+    // console.log('this day doesnt exist!')
+    return 'this day doesnt exist!'
+  }
+  }
 
   getMinutesActive = (givenId, date) => {
-    const daySelected = this.data.activityData.find((userDay) => {
-      return userDay.userID === givenId && userDay.date === date
-    });  
-    const minutesActive = daySelected.minutesActive
-      return minutesActive
-  };
+    if(this.checkDateExists(date)) {
+      const specificUser = this.activity.activityData.find((data) => {
+        return data.date === date && data.userID === givenId
+      })
+      return specificUser.minutesActive
+    } else {
+      // console.log('this day doesnt exist!')
+      return 'this day doesnt exist!'
+    }
+  }
 
   determineReachGoal = (givenId, date) => {
-    const specificUser = this.userData.users.find((person) => {
-      return person.id === givenId
-    });
-    const dailyStepGoal = specificUser.dailyStepGoal
-    const specificDay = this.data.activityData.find((person) => {
-      return person.userID === givenId && person.date === date
-    });
-    const stepsOnly = specificDay.numSteps
-      if (stepsOnly < dailyStepGoal) {
-        const remainder = dailyStepGoal - stepsOnly
-          return `You walked ${specificDay.numSteps} today. That's ${remainder} steps below your goal of ${dailyStepGoal} steps.`
-      } else if (stepsOnly >= dailyStepGoal) {
-          return `You hit your step goal! You walked ${stepsOnly} steps out of your goal of ${dailyStepGoal} steps!`
-      };
+    if(this.checkDateExists(date)) {
+      const specificUser = this.data.userData.find((user) => {
+        return user.id === givenId
+      }) 
+      const specificUserStepGoal = specificUser.dailyStepGoal
+      const specificDaySteps = this.getSpecificDayData(givenId, date).numSteps
+
+      if(specificUserStepGoal > specificDaySteps) {
+        return `You walked ${specificDaySteps} steps today. That's ${specificUserStepGoal - specificDaySteps} steps below your goal of ${specificUserStepGoal} steps.`
+      } else if(specificDaySteps > specificUserStepGoal) {
+        return (`You walked ${specificDaySteps} steps today. Thats ${specificDaySteps - specificUserStepGoal} steps above your goal of ${specificUserStepGoal} steps!`)
+      }
+    } else {
+      return 'this day doesnt exist!'
+    }
   };
 
   overAWeek = (id, startDate, stopDate) => {
-    let activityData = []
-    const user = this.data.activityData.filter((item) => item.userID === id)
-    user.forEach((item) => {
-      if (item.date >= startDate && item.date <= stopDate)
-        activityData.push(item)
-    })
-    const activityObject = activityData.reduce((acc, item) => ({...acc, [item.date]: item.minutesActive}), {})
-      return activityObject
+    if (this.activity.activityData.some((data) => { 
+      return data.date >= startDate && data.date <= stopDate
+    })) {
+      const userDates = this.activity.activityData.filter((data) => {
+        return data.userID === id && data.date >= startDate && data.date <= stopDate
+      })
+      const userObject = userDates.reduce((acc, currentData) => {
+          acc[currentData.date] = currentData.minutesActive
+          console.log(acc)
+        return acc
+      },{})
+      return userObject
+    } else {
+      return 'wrongDates!'
+    }
   };
-};
+}
 
 export default Activity;
