@@ -19,3 +19,7 @@ export function fetchSleep() {
     .then(response => response.json())
 };
 
+export function inspireQuotes() {
+  return fetch("https://type.fit/api/quotes")
+    .then(response => response.json())
+};
