@@ -1,9 +1,3 @@
-// function getUrl(data) {
-//   return `http://localhost:3001/api/v1/${data}`
-// }
-
-
-
 const fitFans = "http://localhost:3001/api/v1/users"
 const hydrate = "http://localhost:3001/api/v1/hydration"
 const move = "http://localhost:3001/api/v1/activity"
