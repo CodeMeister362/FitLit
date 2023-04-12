@@ -48,7 +48,10 @@ window.addEventListener("load", () => {
         <li>Your daily step goal is ${user.dailyStepGoal}</li>
         <li>The average step goal of all FitLitFans is ${user.getAverageSteps(data.users)}</li>
       </ul>`
-    });
+    })
+    .catch((error) => {
+    console.error('Error fetching user data:', error);
+ });
 
   apiCalls.fetchHydration().then((data) => {
     const waterCard = document.querySelector('.water-card');
