@@ -18,8 +18,8 @@ export function fetchSleep() {
     .then(response => response.json())
 };
 
-export function kanyeIsBatShitCrazy() {
-  return fetch("https://api.kanye.rest")
+export function inspireQuotes() {
+  return fetch("https://type.fit/api/quotes")
     .then(response => response.json())
 };
 
