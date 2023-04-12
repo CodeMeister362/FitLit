@@ -1,3 +1,4 @@
+
 export function fetchUsers() {
   return fetch("https://fitlit-api.herokuapp.com/api/v1/users")
     .then(response => response.json());
@@ -15,11 +16,6 @@ export function fetchActivity() {
 
 export function fetchSleep() {
   return fetch("https://fitlit-api.herokuapp.com/api/v1/sleep")
-    .then(response => response.json())
-};
-
-export function kanyeIsBatShitCrazy() {
-  return fetch("https://api.kanye.rest")
     .then(response => response.json())
 };
 
