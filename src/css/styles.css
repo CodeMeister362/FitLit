@@ -16,11 +16,11 @@ body {
   
 
 .header-img {
-  width: 100%;
+  width: 100cqmax;
 }
 
 .main {
-  width: 90vw;
+  width: 90%;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
   justify-content: center;
@@ -29,7 +29,7 @@ body {
 }
 
 .cards {
-  width: fit-content;
+  width: 90cqmax fit-content;
   background-color: #220d8d;
   color: aliceblue;
   padding-right: 5%;
