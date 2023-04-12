@@ -73,26 +73,29 @@ window.addEventListener("load", () => {
         <p>On ${hydrationWeekKeys[4]} you drank ${hydrationWeekValues[4]} ounces of water</p>
         <p>On ${hydrationWeekKeys[5]} you drank ${hydrationWeekValues[5]} ounces of water</p>
         <p>On ${hydrationWeekKeys[6]} you drank ${hydrationWeekValues[6]} ounces of water</p>
-      </ul>`
-  });
+      </ul>`;
+  })
+   .catch((error) => {
+    console.error('Error fetching hydration data:', error);
+ });
 
   apiCalls.fetchSleep()
    .then((data) => {
-    const userSleep = new Sleep(data);
+    const userSleep = new Sleep(data, idRandom);
     const sleepCard = document.querySelector('.sleep-card');
     const display = { day: '2-digit', month: '2-digit', year: 'numeric' };
     const todayDate = new Date().toLocaleDateString('fr-CA', display).replace(/-/g, '/');
     const aWeekEarlier = new Date(new Date().setDate(new Date().getDate() - 7)).toLocaleDateString('fr-CA', display).replace(/-/g, '/')
-    const sleepDay = userSleep.getHoursByDay(idRandom, todayDate);
-    const dayQuality = userSleep.getSleepQualityByDay(idRandom, todayDate);
-    const sleepWeek = userSleep.getHoursSleptByWeek(idRandom, aWeekEarlier, todayDate);
-    const qualityWeek = userSleep.getSleepQualitytByWeek(idRandom, aWeekEarlier, todayDate,);
+    const sleepDay = userSleep.getHoursByDay(todayDate);
+    const dayQuality = userSleep.getSleepQualityByDay(todayDate);
+    const sleepWeek = userSleep.getHoursSleptByWeek(aWeekEarlier, todayDate);
+    const qualityWeek = userSleep.getSleepQualitytByWeek(aWeekEarlier, todayDate,);
     const sleepWeekKeys = Object.keys(sleepWeek);
     const sleepWeekValues = Object.values(sleepWeek);
     const qualityWeekKeys = Object.keys(qualityWeek);
     const qualityWeekValues = Object.values(qualityWeek);
-    const allTimeSleep = userSleep.getAllTimeSleepAve(idRandom);
-    const allTimeSleepQuality = userSleep.getAllTimeQualityAve(idRandom);
+    const allTimeSleep = userSleep.getAllTimeSleepAve();
+    const allTimeSleepQuality = userSleep.getAllTimeQualityAve();
 
 
     sleepCard.innerHTML = 
@@ -126,8 +129,6 @@ window.addEventListener("load", () => {
     console.error('Error fetching sleep data:', error);
  });
 
-  });
-
 apiCalls.fetchUsers().then((userData) => {
   apiCalls.fetchActivity().then((activitydata) => {
     const activityCard = document.querySelector('.step-card');
@@ -153,6 +154,9 @@ apiCalls.fetchUsers().then((userData) => {
             <p>On ${activityWeekKeys[5]} you were active for ${activityWeekValues[5]} minutes</p>
             <p>On ${activityWeekKeys[6]} you were active for ${activityWeekValues[6]} minutes</p>
         </ul>`
-  });
+  })
+   .catch((error) => {
+    console.error('Error fetching activity data:', error);
+ });
 });
-
+});

@@ -8,10 +8,12 @@ class Sleep{
   
   
 getUserData() {
-  if(userID) {
- return this.data.sleepData.filter((sleepObject) => sleepObject.userID === this.userID);
-  } else {
+   
+ const userSleepData = this.data.sleepData.filter((sleepObject) => sleepObject.userID === this.userID);
+ if(userSleepData.length < 1) {
     return "This is not a valid user ID"
+  } else {
+    return userSleepData
   }
 }
 

@@ -11,6 +11,11 @@ describe("Sleep Class", () => {
 
   });
 
+  it("should check to see if the user ID exists and report if not", function() {
+    mockSleep = new Sleep(sampleSleepData, 99);  
+    assert.equal(mockSleep.getUserData(), "This is not a valid user ID");
+  });
+
   it("should calculate the ave hours a usser has slept for all time", function() {
     assert.equal(mockSleep.getAllTimeSleepAve(), 7)
   });
