@@ -15,14 +15,16 @@ import Water from './hydrationClass';
 import Activity from './activityClass'
 import Sleep from './sleepClass';
 
+import Chart from 'chart.js/auto';
+
 
 
   
 window.addEventListener("load", () => {
 
-  apiCalls.kanyeIsBatShitCrazy().then((data) => {
-    const ye = document.querySelector(".kanye")
-      ye.innerText = `"${data.quote}" -Ye`
+  apiCalls.inspireQuotes().then((data) => {
+    const zen = document.querySelector(".quotes")
+      zen.innerText = `"${data[randomNum].text} - ${data[randomNum].author}`
   });
 
   function getRandomInt() {
@@ -64,20 +66,50 @@ window.addEventListener("load", () => {
     const hydrationWeekKeys = Object.keys(overAWeekObject);
     const hydrationWeekValues = Object.values(overAWeekObject);
 
+
     waterCard.innerHTML =
       `<h3>Your Hydration</h3>
       <ul>
         <li>Your average fluid ounces consumed per day is ${userWater.averageOuncesPerDay(idRandom)}</li>
         <li>You drank ${userWater.getSpecificDay(idRandom, todayDate)} ounces today</li>
-        <p>On ${hydrationWeekKeys[0]} you drank ${hydrationWeekValues[0]} ounces of water</p>
-        <p>On ${hydrationWeekKeys[1]} you drank ${hydrationWeekValues[1]} ounces of water</p>
-        <p>On ${hydrationWeekKeys[2]} you drank ${hydrationWeekValues[2]} ounces of water</p>
-        <p>On ${hydrationWeekKeys[2]} you drank ${hydrationWeekValues[2]} ounces of water</p>
-        <p>On ${hydrationWeekKeys[3]} you drank ${hydrationWeekValues[3]} ounces of watrer</p>
-        <p>On ${hydrationWeekKeys[4]} you drank ${hydrationWeekValues[4]} ounces of water</p>
-        <p>On ${hydrationWeekKeys[5]} you drank ${hydrationWeekValues[5]} ounces of water</p>
-        <p>On ${hydrationWeekKeys[6]} you drank ${hydrationWeekValues[6]} ounces of water</p>
-      </ul>`
+        </ul>
+        <canvas class="hydration-chart"></canvas>
+        `
+
+    new Chart(document.querySelector(".hydration-chart"), {
+      type: 'line',
+      data: {
+        labels: [hydrationWeekKeys[0],hydrationWeekKeys[1],hydrationWeekKeys[2],hydrationWeekKeys[3],hydrationWeekKeys[4],hydrationWeekKeys[5],hydrationWeekKeys[6]],
+        datasets: [{ 
+            data: [hydrationWeekValues[0],hydrationWeekValues[1],hydrationWeekValues[2],hydrationWeekValues[3],hydrationWeekValues[4],hydrationWeekValues[5],hydrationWeekValues[6]],
+            label: "Drank",
+            borderColor: "#3e95cd",
+            fill: true
+          }
+        ]
+      },
+      options: {
+        plugins: {legend: {
+          labels: {
+            color: '#fff'
+          },
+        },
+      },
+        scales: {
+          x: {
+            ticks: {
+              color: '#fff'
+            },
+          },
+          y: {
+            ticks: {
+              color: '#fff'
+            },
+            beginAtZero: true
+          }
+        }
+      }
+    });
   });
 
   apiCalls.fetchSleep()
@@ -99,65 +131,155 @@ window.addEventListener("load", () => {
     const allTimeSleepQuality = userSleep.getAllTimeQualityAve(idRandom);
 
  
-
     sleepCard.innerHTML = 
     `<h3>Your Sleep</h3>
     <ul>
       <li><b>Last Night</b>
         <p>${sleepDay} hours slept</p>
         <p>${dayQuality} sleep quality</p>
-      <li><b>Last Week</b></li>
-        <p>${sleepWeekKeys[0]}: ${sleepWeekValues[0]} hours slept</p>
-        <p>${sleepWeekKeys[1]}: ${sleepWeekValues[1]} hours slept</p>
-        <p>${sleepWeekKeys[2]}: ${sleepWeekValues[2]} hours slept</p>
-        <p>${sleepWeekKeys[3]}: ${sleepWeekValues[3]} hours slept</p>
-        <p>${sleepWeekKeys[4]}: ${sleepWeekValues[4]} hours slept</p>
-        <p>${sleepWeekKeys[5]}: ${sleepWeekValues[5]} hours slept</p>
-        <p>${sleepWeekKeys[6]}: ${sleepWeekValues[6]} hours slept</p>
-        <p>${qualityWeekKeys[0]}: ${qualityWeekValues[0]} sleep quality</p>
-        <p>${qualityWeekKeys[1]}: ${qualityWeekValues[1]} sleep quality</p>
-        <p>${qualityWeekKeys[2]}: ${qualityWeekValues[2]} sleep quality</p>
-        <p>${qualityWeekKeys[3]}: ${qualityWeekValues[3]} sleep quality</p>
-        <p>${qualityWeekKeys[4]}: ${qualityWeekValues[4]} sleep quality</p>
-        <p>${qualityWeekKeys[5]}: ${qualityWeekValues[5]} sleep quality</p>
-        <p>${qualityWeekKeys[6]}: ${qualityWeekValues[6]} sleep quality</p>
+    </ul>
+    <canvas class="sleep-chart"></canvas>
+    <ul>
       <li><b>All Time</b></li>
         <p>${allTimeSleep} hours slept</p>
         <p>${allTimeSleepQuality} sleep quality</p>
     </ul>
+    <canvas class="quality-sleep-chart"></canvas>
     `
+    new Chart(document.querySelector(".quality-sleep-chart"), {
+      type: 'line',
+      data: {
+        labels: [qualityWeekKeys[0],qualityWeekKeys[1],qualityWeekKeys[2],qualityWeekKeys[3],qualityWeekKeys[4],qualityWeekKeys[5],qualityWeekKeys[6]],
+        datasets: [{ 
+            data: [qualityWeekValues[0],qualityWeekValues[1],qualityWeekValues[2],qualityWeekValues[3],qualityWeekValues[4],qualityWeekValues[5],qualityWeekValues[6]],
+            label: "Quality Sleep Last Week",
+            borderColor: "#3e95cd",
+            fill: true
+          }
+        ]
+      },
+      options: {
+        plugins: {legend: {
+          labels: {
+            color: '#fff'
+          },
+        },
+      },
+        scales: {
+          x: {
+            ticks: {
+              color: '#fff'
+            },
+          },
+          y: {
+            ticks: {
+              color: '#fff'
+            },
+            beginAtZero: true
+          }
+        }
+      }
+    });
+
+    new Chart(document.querySelector(".sleep-chart"), {
+      type: 'line',
+      data: {
+        labels: [sleepWeekKeys[0],sleepWeekKeys[1],sleepWeekKeys[2],sleepWeekKeys[3],sleepWeekKeys[4],sleepWeekKeys[5],sleepWeekKeys[6]],
+        datasets: [{ 
+            data: [sleepWeekValues[0],sleepWeekValues[1],sleepWeekValues[2],sleepWeekValues[3],sleepWeekValues[4],sleepWeekValues[5],sleepWeekValues[6]],
+            label: "Sleep Last Week",
+            borderColor: "#3e95cd",
+            fill: true
+          }
+        ]
+      },
+      options: {
+        plugins: {legend: {
+          labels: {
+            color: '#fff'
+          },
+        },
+      },
+        scales: {
+          x: {
+            ticks: {
+              color: '#fff'
+            },
+          },
+          y: {
+            ticks: {
+              color: '#fff'
+            },
+            beginAtZero: true
+          }
+        }
+      }
+    });
    })
  .catch((error) => {
     console.error('Error fetching sleep data:', error);
  });
 
-  });
 
-apiCalls.fetchUsers().then((userData) => {
-  apiCalls.fetchActivity().then((activitydata) => {
-    const activityCard = document.querySelector('.step-card');
-    const userActivity = new Activity(activitydata, userData);
-    const display = { day: '2-digit', month: '2-digit', year: 'numeric' };
-    const todayDate = new Date().toLocaleDateString('fr-CA', display).replace(/-/g, '/');
-    const aWeekEarlier = new Date(new Date().setDate(new Date().getDate() - 7)).toLocaleDateString('fr-CA', display).replace(/-/g, '/');
-    const activityWeekObject = userActivity.overAWeek(46, aWeekEarlier, todayDate);
-    const activityWeekKeys = Object.keys(activityWeekObject);
-    const activityWeekValues = Object.values(activityWeekObject);
-    
-    activityCard.innerHTML = 
-      `<h3>Your Activity</h3>
-        <ul>
-          <li>You have walked ${userActivity.getMilesWalked(46, todayDate)} miles today.</li>
-          <li>You've been active for ${userActivity.getMinutesActive(46, todayDate)} minutes today!</li>
-          <li>${userActivity.determineReachGoal(46, todayDate)}</li>
-            <p>On ${activityWeekKeys[0]} you were active for ${activityWeekValues[0]} minutes</p>
-            <p>On ${activityWeekKeys[1]} you were active for ${activityWeekValues[0]} minutes</p>
-            <p>On ${activityWeekKeys[2]} you were active for ${activityWeekValues[2]} minutes</p>
-            <p>On ${activityWeekKeys[3]} you were active for ${activityWeekValues[3]} minutes</p>
-            <p>On ${activityWeekKeys[4]} you were active for ${activityWeekValues[4]} minutes</p>
-            <p>On ${activityWeekKeys[5]} you were active for ${activityWeekValues[5]} minutes</p>
-            <p>On ${activityWeekKeys[6]} you were active for ${activityWeekValues[6]} minutes</p>
-        </ul>`
+
+
+
+  apiCalls.fetchUsers().then((userData) => {
+    apiCalls.fetchActivity().then((activitydata) => {
+      const activityCard = document.querySelector('.activity-card');
+      const userActivity = new Activity(activitydata, userData);
+      const display = { day: '2-digit', month: '2-digit', year: 'numeric' };
+      const todayDate = new Date().toLocaleDateString('fr-CA', display).replace(/-/g, '/');
+      const aWeekEarlier = new Date(new Date().setDate(new Date().getDate() - 7)).toLocaleDateString('fr-CA', display).replace(/-/g, '/');
+      const activityWeekObject = userActivity.overAWeek(46, aWeekEarlier, todayDate);
+      const activityWeekKeys = Object.keys(activityWeekObject);
+      const activityWeekValues = Object.values(activityWeekObject);
+      
+      activityCard.innerHTML = 
+        `<h3>Your Activity</h3>
+          <ul>
+            <li>You have walked ${userActivity.getMilesWalked(46, todayDate).toFixed(2)} miles today.</li>
+            <li>You've been active for ${userActivity.getMinutesActive(46, todayDate)} minutes today!</li>
+            <li>${userActivity.determineReachGoal(46, todayDate)}</li>
+          </ul>
+          <canvas class="activity-chart"></canvas>
+          `
+
+    new Chart(document.querySelector(".activity-chart"), {
+        type: 'line',
+        data: {
+          labels: [activityWeekKeys[0],activityWeekKeys[1],activityWeekKeys[2],activityWeekKeys[3],activityWeekKeys[4],activityWeekKeys[5],activityWeekKeys[6]],
+          datasets: [{ 
+              data: [activityWeekValues[0],activityWeekValues[1],activityWeekValues[2],activityWeekValues[3],activityWeekValues[4],activityWeekValues[5],activityWeekValues[6]],
+              label: "Minutes Active",
+              borderColor: "#3e95cd",
+              fill: true
+            }
+          ]
+        },
+        options: {
+            plugins: {legend: {
+              labels: {
+                color: '#fff'
+              },
+            },
+          },
+          scales: {
+            x: {
+              ticks: {
+                color: '#fff'
+              },
+            },
+            y: {
+              ticks: {
+                color: '#fff'
+              },
+              beginAtZero: true
+            }
+          }
+        }
+      });
+    });
   });
 });
 

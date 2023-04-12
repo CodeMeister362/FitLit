@@ -11,8 +11,6 @@ body {
   background: linear-gradient(to top, #4123ef 0%, #6fbce9 99%, #cff5fe 100%);
   transition: transform 250ms ease-out;
 }
-
-/* background: linear-gradient(0.25turn, #3365ee, #3c4b7b, #6d758a); */
   
 
 .header-img {
@@ -77,9 +75,37 @@ h3 {
   text-align: center;
 }
 
-.kanye {
+.quotes {
   font-style: italic;
   font-size: x-large;
   color: yellow;
   text-align: center;
+}
+
+.activity-chart {
+  max-width:400px;
+  min-width:100px;
+  max-height: 400px;
+  min-height:100px;
+}
+
+.hydration-chart {
+  max-width:400px;
+  min-width:100px;
+  max-height: 400px;
+  min-height:100px;
+}
+
+.sleep-chart {
+  max-width:400px;
+  min-width:100px;
+  max-height: 400px;
+  min-height:100px;
+}
+
+.quality-sleep-chart {
+  max-width:400px;
+  min-width:100px;
+  max-height: 400px;
+  min-height:100px;
 }
