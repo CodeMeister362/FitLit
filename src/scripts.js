@@ -17,6 +17,22 @@ import Sleep from './sleepClass';
 
 import Chart from 'chart.js/auto';
 
+const inputDate = document.getElementById('date')
+const inputStairs = document.getElementById('numOfStairs')
+const inputMinActive = document.getElementById('minActive')
+const inputNumSteps = document.getElementById('numSteps')
+const inputButton = document.getElementById('addDataButton')
+
+const checkInputs = () => {
+  if(inputDate.value.length >= 3 && inputStairs.value.length >= 3 && inputMinActive.value.length >= 3 && inputNumSteps.value.length >= 3){
+    console.log('hey')
+  } else {
+    console.log('missing inputs')
+  }
+}
+
+
+inputButton.addEventListener('click', () => checkInputs())
 
 
   
@@ -82,7 +98,7 @@ window.addEventListener("load", () => {
     new Chart(document.querySelector(".hydration-chart"), {
       type: 'line',
       data: {
-        labels: [hydrationWeekKeys[0],hydrationWeekKeys[1],hydrationWeekKeys[2],hydrationWeekKeys[3],hydrationWeekKeys[4],hydrationWeekKeys[5],hydrationWeekKeys[6]],
+        labels: [hydrationWeekKeys[0].slice(5, 10),hydrationWeekKeys[1].slice(5, 10),hydrationWeekKeys[2].slice(5, 10),hydrationWeekKeys[3].slice(5, 10),hydrationWeekKeys[4].slice(5, 10),hydrationWeekKeys[5].slice(5, 10),hydrationWeekKeys[6].slice(5, 10)],
         datasets: [{ 
             data: [hydrationWeekValues[0],hydrationWeekValues[1],hydrationWeekValues[2],hydrationWeekValues[3],hydrationWeekValues[4],hydrationWeekValues[5],hydrationWeekValues[6]],
             label: "Drank",
@@ -154,7 +170,7 @@ window.addEventListener("load", () => {
     new Chart(document.querySelector(".quality-sleep-chart"), {
       type: 'line',
       data: {
-        labels: [qualityWeekKeys[0],qualityWeekKeys[1],qualityWeekKeys[2],qualityWeekKeys[3],qualityWeekKeys[4],qualityWeekKeys[5],qualityWeekKeys[6]],
+        labels: [qualityWeekKeys[0].slice(5, 10),qualityWeekKeys[1].slice(5, 10),qualityWeekKeys[2].slice(5, 10),qualityWeekKeys[3].slice(5, 10),qualityWeekKeys[4].slice(5, 10),qualityWeekKeys[5].slice(5, 10),qualityWeekKeys[6].slice(5, 10)],
         datasets: [{ 
             data: [qualityWeekValues[0],qualityWeekValues[1],qualityWeekValues[2],qualityWeekValues[3],qualityWeekValues[4],qualityWeekValues[5],qualityWeekValues[6]],
             label: "Quality Sleep Last Week",
@@ -189,7 +205,7 @@ window.addEventListener("load", () => {
     new Chart(document.querySelector(".sleep-chart"), {
       type: 'line',
       data: {
-        labels: [sleepWeekKeys[0],sleepWeekKeys[1],sleepWeekKeys[2],sleepWeekKeys[3],sleepWeekKeys[4],sleepWeekKeys[5],sleepWeekKeys[6]],
+        labels: [sleepWeekKeys[0].slice(5, 10),sleepWeekKeys[1].slice(5, 10),sleepWeekKeys[2].slice(5, 10),sleepWeekKeys[3].slice(5, 10),sleepWeekKeys[4].slice(5, 10),sleepWeekKeys[5].slice(5, 10),sleepWeekKeys[6].slice(5, 10)],
         datasets: [{ 
             data: [sleepWeekValues[0],sleepWeekValues[1],sleepWeekValues[2],sleepWeekValues[3],sleepWeekValues[4],sleepWeekValues[5],sleepWeekValues[6]],
             label: "Sleep Last Week",
@@ -249,7 +265,7 @@ window.addEventListener("load", () => {
     new Chart(document.querySelector(".activity-chart"), {
         type: 'line',
         data: {
-          labels: [activityWeekKeys[0],activityWeekKeys[1],activityWeekKeys[2],activityWeekKeys[3],activityWeekKeys[4],activityWeekKeys[5],activityWeekKeys[6]],
+          labels: [activityWeekKeys[0].slice(5, 10),activityWeekKeys[1].slice(5, 10),activityWeekKeys[2].slice(5, 10),activityWeekKeys[3].slice(5, 10),activityWeekKeys[4].slice(5, 10),activityWeekKeys[5].slice(5, 10),activityWeekKeys[6].slice(5, 10)],,
           datasets: [{ 
               data: [activityWeekValues[0],activityWeekValues[1],activityWeekValues[2],activityWeekValues[3],activityWeekValues[4],activityWeekValues[5],activityWeekValues[6]],
               label: "Minutes Active",
