@@ -30,28 +30,16 @@ window.addEventListener("load", () => {
   function getRandomInt() {
     return Math.floor(Math.random() * 50);
   };
-
   const randomNum = getRandomInt();
-  const idRandom = randomNum - 1;
-  let person;
- 
+
 
   apiCalls.fetchUsers().then((data) => {
-    person = data.users[randomNum];
     const userCard = document.querySelector('.user-card');
-    const user = new UserRepository(
-      data.users[randomNum].id, 
-      data.users[randomNum].name, 
-      data.users[randomNum].address, 
-      data.users[randomNum].email, 
-      data.users[randomNum].strideLength, 
-      data.users[randomNum].dailyStepGoal, 
-      data.users[randomNum].friends
-      );
+    const user = new UserRepository(data);
     userCard.innerHTML = 
-    `<h3>Welcome ${user.getFirstName(user.id, data.users)}!</h3>
+    `<h3>Welcome ${user.getFirstName(randomNum)}!</h3>
       <ul>
-        <li>Your daily step goal is ${user.dailyStepGoal}</li>
+        <li>Your daily step goal is ${data.users[randomNum].dailyStepGoal}</li>
         <li>The average step goal of all FitLitFans is ${user.getAverageSteps(data.users)}</li>
       </ul>`
     })
@@ -65,7 +53,7 @@ window.addEventListener("load", () => {
     const display = { day: '2-digit', month: '2-digit', year: 'numeric' };
     const todayDate = new Date().toLocaleDateString('fr-CA', display).replace(/-/g, '/');
     const aWeekEarlier = new Date(new Date().setDate(new Date().getDate() - 7)).toLocaleDateString('fr-CA', display).replace(/-/g, '/');
-    const overAWeekObject = userWater.overAWeek(idRandom, aWeekEarlier, todayDate);
+    const overAWeekObject = userWater.overAWeek(randomNum, aWeekEarlier, todayDate);
     const hydrationWeekKeys = Object.keys(overAWeekObject);
     const hydrationWeekValues = Object.values(overAWeekObject);
 
@@ -73,8 +61,8 @@ window.addEventListener("load", () => {
     waterCard.innerHTML =
       `<h3>Your Hydration</h3>
       <ul>
-        <li>Your average fluid ounces consumed per day is ${userWater.averageOuncesPerDay(idRandom)}</li>
-        <li>You drank ${userWater.getSpecificDay(idRandom, todayDate)} ounces today</li>
+        <li>Your average fluid ounces consumed per day is ${userWater.averageOuncesPerDay(randomNum)}</li>
+        <li>You drank ${userWater.getSpecificDay(randomNum, todayDate)} ounces today</li>
         </ul>
         <canvas class="hydration-chart"></canvas>
         `
@@ -120,7 +108,7 @@ window.addEventListener("load", () => {
 
   apiCalls.fetchSleep()
    .then((data) => {
-    const userSleep = new Sleep(data, idRandom);
+    const userSleep = new Sleep(data, randomNum);
     const sleepCard = document.querySelector('.sleep-card');
     const display = { day: '2-digit', month: '2-digit', year: 'numeric' };
     const todayDate = new Date().toLocaleDateString('fr-CA', display).replace(/-/g, '/');
@@ -232,16 +220,16 @@ window.addEventListener("load", () => {
       const display = { day: '2-digit', month: '2-digit', year: 'numeric' };
       const todayDate = new Date().toLocaleDateString('fr-CA', display).replace(/-/g, '/');
       const aWeekEarlier = new Date(new Date().setDate(new Date().getDate() - 7)).toLocaleDateString('fr-CA', display).replace(/-/g, '/');
-      const activityWeekObject = userActivity.overAWeek(46, aWeekEarlier, todayDate);
+      const activityWeekObject = userActivity.overAWeek(randomNum, aWeekEarlier, todayDate);
       const activityWeekKeys = Object.keys(activityWeekObject);
       const activityWeekValues = Object.values(activityWeekObject);
       
       activityCard.innerHTML = 
         `<h3>Your Activity</h3>
           <ul>
-            <li>You have walked ${userActivity.getMilesWalked(46, todayDate).toFixed(2)} miles today.</li>
-            <li>You've been active for ${userActivity.getMinutesActive(46, todayDate)} minutes today!</li>
-            <li>${userActivity.determineReachGoal(46, todayDate)}</li>
+            <li>You have walked ${userActivity.getMilesWalked(randomNum, todayDate).toFixed(2)} miles today.</li>
+            <li>You've been active for ${userActivity.getMinutesActive(randomNum, todayDate)} minutes today!</li>
+            <li>${userActivity.determineReachGoal(randomNum, todayDate)}</li>
           </ul>
           <canvas class="activity-chart"></canvas>
           `
@@ -279,7 +267,7 @@ window.addEventListener("load", () => {
             }
           }
         }
+      })
       });
     });
   });
-});
