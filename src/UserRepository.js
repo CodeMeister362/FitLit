@@ -4,18 +4,18 @@ class UserRepository {
   };
 
   getUserData = (id) => {
-    return this.data.userData.find((user) => user.id === id)  
+    return this.data.users.find((user) => user.id === id)  
   };
 
   getAverageSteps = () => {
-    const steps = this.data.userData.reduce((acc, currentUser) => {
+    const steps = this.data.users.reduce((acc, currentUser) => {
      acc += currentUser.dailyStepGoal
      return acc 
     }, 0)
-        return Math.round(steps / this.data.userData.length)
+        return Math.round(steps / this.data.users.length)
   }
   getFirstName = (id) => {
-    const fullName = this.data.userData.find((user) => user.id === id)
+    const fullName = this.data.users.find((user) => user.id === id)
       return fullName.name.split(' ').shift()
   };
 };

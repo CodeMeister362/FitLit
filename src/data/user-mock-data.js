@@ -1,5 +1,5 @@
 const userMockData = { 
-  userData: [
+  users: [
   {
   "id": 1,
   "name": "Trystan Gorczany",

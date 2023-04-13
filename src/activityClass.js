@@ -18,7 +18,7 @@ class Activity {
 
   getMilesWalked = (givenId, date) => {
     if(this.checkDateExists(date)) {
-      const specificUser = this.data.userData.find((user) => {
+      const specificUser = this.data.users.find((user) => {
         return user.id === givenId
       }) 
       const specificUserStrideLength = specificUser.strideLength
@@ -45,7 +45,7 @@ class Activity {
 
   determineReachGoal = (givenId, date) => {
     if(this.checkDateExists(date)) {
-      const specificUser = this.data.userData.find((user) => {
+      const specificUser = this.data.users.find((user) => {
         return user.id === givenId
       }) 
       const specificUserStepGoal = specificUser.dailyStepGoal
