@@ -1,25 +1,30 @@
+const fitFans = "http://localhost:3001/api/v1/users"
+const hydrate = "http://localhost:3001/api/v1/hydration"
+const move = "http://localhost:3001/api/v1/activity"
+const sleep = "http://localhost:3001/api/v1/sleep"
+const quotes = "https://type.fit/api/quotes"
 
 export function fetchUsers() {
-  return fetch("https://fitlit-api.herokuapp.com/api/v1/users")
+  return fetch(fitFans)
     .then(response => response.json());
 };
 
 export function fetchHydration() {
-  return fetch("https://fitlit-api.herokuapp.com/api/v1/hydration")
+  return fetch(hydrate)
     .then(response => response.json())
 };
 
 export function fetchActivity() {
-  return fetch("https://fitlit-api.herokuapp.com/api/v1/activity")
+  return fetch(move)
   .then(response => response.json())
 };
 
 export function fetchSleep() {
-  return fetch("https://fitlit-api.herokuapp.com/api/v1/sleep")
+  return fetch(sleep)
     .then(response => response.json())
 };
 
 export function inspireQuotes() {
-  return fetch("https://type.fit/api/quotes")
+  return fetch(quotes)
     .then(response => response.json())
 };
