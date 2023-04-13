@@ -30,14 +30,10 @@ window.addEventListener("load", () => {
   function getRandomInt() {
     return Math.floor(Math.random() * 50);
   };
-
   const randomNum = getRandomInt();
-  const idRandom = randomNum - 1;
-  let person;
- 
+
 
   apiCalls.fetchUsers().then((data) => {
-    person = data.users[randomNum];
     const userCard = document.querySelector('.user-card');
     const user = new UserRepository(data);
     userCard.innerHTML = 
@@ -57,7 +53,7 @@ window.addEventListener("load", () => {
     const display = { day: '2-digit', month: '2-digit', year: 'numeric' };
     const todayDate = new Date().toLocaleDateString('fr-CA', display).replace(/-/g, '/');
     const aWeekEarlier = new Date(new Date().setDate(new Date().getDate() - 7)).toLocaleDateString('fr-CA', display).replace(/-/g, '/');
-    const overAWeekObject = userWater.overAWeek(idRandom, aWeekEarlier, todayDate);
+    const overAWeekObject = userWater.overAWeek(randomNum, aWeekEarlier, todayDate);
     const hydrationWeekKeys = Object.keys(overAWeekObject);
     const hydrationWeekValues = Object.values(overAWeekObject);
 
