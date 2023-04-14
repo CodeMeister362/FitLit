@@ -14,28 +14,21 @@ import UserRepository from './UserRepository';
 import Water from './hydrationClass';
 import Activity from './activityClass'
 import Sleep from './sleepClass';
+import newData from './newData';
 
 import Chart from 'chart.js/auto';
 
-const inputDate = document.getElementById('date')
-const inputStairs = document.getElementById('numOfStairs')
-const inputMinActive = document.getElementById('minActive')
-const inputNumSteps = document.getElementById('numSteps')
-const inputButton = document.getElementById('addDataButton')
-
-const checkInputs = () => {
-  if(inputDate.value.length >= 3 && inputStairs.value.length >= 3 && inputMinActive.value.length >= 3 && inputNumSteps.value.length >= 3){
-    console.log('hey')
-  } else {
-    console.log('missing inputs')
-  }
-}
 
 
-inputButton.addEventListener('click', () => checkInputs())
 
+// const checkInputs = () => {
+//   if(inputDate.value.length >= 3 && inputStairs.value.length >= 3 && inputMinActive.value.length >= 3 && inputNumSteps.value.length >= 3){
+//     console.log('hey')
+//   } else {
+//     console.log('missing inputs')
+//   }
+// }
 
-  
 window.addEventListener("load", () => {
 
   apiCalls.inspireQuotes().then((data) => {
@@ -48,8 +41,59 @@ window.addEventListener("load", () => {
   };
   const randomNum = getRandomInt();
 
+  const buttonChange = (event) => {
+    event.preventDefault()
+  }
+  
+  const makeNewData = (event) => {
+    event.preventDefault()
+    console.log('clicked')
+    if(inputDate.value && inputNumSteps.value && inputMinActive.value && inputStairs.value){
+    const dataToSend = new newData(randomNum, inputDate.value.replace(/-/g, '/'), inputNumSteps.value, inputMinActive.value, inputStairs.value)
+    console.log(dataToSend)
+
+    // dataToSend.keys
+    // dataToSend.values
+
+    // innerhtml graph of the new data
+
+    fetch('http://localhost:3001/api/v1/activity', {
+      method: 'POST',
+      body: JSON.stringify(dataToSend), 
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+      .then((response) => {
+        if(!response.ok) {
+          throw new Error(`${response.status}`)
+        } else {
+          return response.json()
+        }
+      })
+      .then(json => console.log(json))
+      .catch(err => console.log(`error`));
+  } else {
+    console.log('error')
+  }
+  }
+  
+  const inputDate = document.querySelector('.date-input')
+  const inputStairs = document.querySelector('.stairs-input')
+  const inputMinActive = document.querySelector('.min-active')
+  const inputNumSteps = document.querySelector('.steps-input')
+  const inputButton = document.querySelector('.add-data-button')
+  
+  inputDate.addEventListener('input', buttonChange)
+  inputStairs.addEventListener('input', buttonChange)
+  inputMinActive.addEventListener('input', buttonChange)
+  inputNumSteps.addEventListener('input', buttonChange)
+  inputButton.addEventListener('click', makeNewData)
 
   apiCalls.fetchUsers().then((data) => {
+    
+    
+
     const userCard = document.querySelector('.user-card');
     const user = new UserRepository(data);
     userCard.innerHTML = 
@@ -61,6 +105,8 @@ window.addEventListener("load", () => {
     })
     .catch((error) => {
     console.error('Error fetching user data:', error);
+
+
  });
 
   apiCalls.fetchHydration().then((data) => {
@@ -253,7 +299,7 @@ window.addEventListener("load", () => {
     new Chart(document.querySelector(".activity-chart"), {
         type: 'line',
         data: {
-          labels: [activityWeekKeys[0].slice(5, 10),activityWeekKeys[1].slice(5, 10),activityWeekKeys[2].slice(5, 10),activityWeekKeys[3].slice(5, 10),activityWeekKeys[4].slice(5, 10),activityWeekKeys[5].slice(5, 10),activityWeekKeys[6].slice(5, 10)],,
+          labels: [activityWeekKeys[0].slice(5, 10),activityWeekKeys[1].slice(5, 10),activityWeekKeys[2].slice(5, 10),activityWeekKeys[3].slice(5, 10),activityWeekKeys[4].slice(5, 10),activityWeekKeys[5].slice(5, 10),activityWeekKeys[6].slice(5, 10)],
           datasets: [{ 
               data: [activityWeekValues[0],activityWeekValues[1],activityWeekValues[2],activityWeekValues[3],activityWeekValues[4],activityWeekValues[5],activityWeekValues[6]],
               label: "Minutes Active",
@@ -286,4 +332,6 @@ window.addEventListener("load", () => {
       })
       });
     });
+
+  
   });

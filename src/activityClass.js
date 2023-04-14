@@ -70,7 +70,6 @@ class Activity {
       })
       const userObject = userDates.reduce((acc, currentData) => {
           acc[currentData.date] = currentData.minutesActive
-          console.log(acc)
         return acc
       },{})
       return userObject
