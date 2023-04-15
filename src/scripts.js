@@ -101,6 +101,7 @@ window.addEventListener("load", () => {
       <ul>
         <li>Your daily step goal is ${data.users[randomNum].dailyStepGoal}</li>
         <li>The average step goal of all FitLitFans is ${user.getAverageSteps(data.users)}</li>
+       
       </ul>`
     })
     .catch((error) => {
@@ -283,9 +284,14 @@ window.addEventListener("load", () => {
       const todayDate = new Date().toLocaleDateString('fr-CA', display).replace(/-/g, '/');
       const aWeekEarlier = new Date(new Date().setDate(new Date().getDate() - 7)).toLocaleDateString('fr-CA', display).replace(/-/g, '/');
       const activityWeekObject = userActivity.overAWeek(randomNum, aWeekEarlier, todayDate);
+      const allMilesWalked = userActivity.getAllMilesWalked(randomNum);
+      const percentGoalsMet = userActivity.getPercentGoalsMet(randomNum);
       const activityWeekKeys = Object.keys(activityWeekObject);
       const activityWeekValues = Object.values(activityWeekObject);
+      const userCard = document.querySelector('.user-card');
       
+      userCard.innerHTML += ` <li>${percentGoalsMet} ${allMilesWalked} miles!</li> `
+
       activityCard.innerHTML = 
         `<h3>Your Activity</h3>
           <ul>
