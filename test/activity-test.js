@@ -26,27 +26,47 @@ describe('activity class', () => {
 				"minutesActive": 261,
 				"flightsOfStairs": 26
 				})
+				assert.equal(activity.getSpecificDayData(1, "2023/03/30"), undefined)
+				assert.equal(activity.getSpecificDayData(8, "2023/03/27"), undefined)		
 		});
 
-		it('should check if a given date does or does not exist in the data set for the specific ID', () => {
-			assert.equal(activity.checkDateExists("2025/11/18"), false)
-			assert.equal(activity.checkDateExists("2023/03/25"), true)
+		it('should return the data from a specific date range based on ID and date', () => {
+			assert.deepEqual(activity.getSpecificRangeData(1, "2023/03/26", "2023/03/27"), 
+			[{
+			"userID": 1,
+			"date": "2023/03/26",
+			"numSteps": 7362,
+			"minutesActive": 261,
+			"flightsOfStairs": 26
+			},
+			{
+			"userID": 1,
+			"date": "2023/03/27",
+			"numSteps": 7362,
+			"minutesActive": 261,
+			"flightsOfStairs": 26
+			}])
+			assert.deepEqual(activity.getSpecificRangeData(1, "2023/03/28", "2023/03/29"), [])
+			assert.deepEqual(activity.getSpecificRangeData(8, "2023/03/26", "2023/03/27"), [])		
 		});
 
 		it('should return miles walked in day based on if date exists in data', () => {
 			assert.equal(activity.getMilesWalked(1, "2023/03/24"), .5)
-			assert.equal(activity.getMilesWalked(1, "2027/03/24"), 'this day doesnt exist!')
+			assert.equal(activity.getMilesWalked(8, "2023/03/24"), undefined)
+			assert.equal(activity.getMilesWalked(1, "2027/03/24"), undefined)
 		});
 
 		it('should return minutes active in a day based on if date exists in data', () => {
 			assert.equal(activity.getMinutesActive(2, "2023/03/24"), 125)
-			assert.equal(activity.getMinutesActive(2, "2028/03/24"), 'this day doesnt exist!')
+			assert.equal(activity.getMinutesActive(2, "2028/03/24"), undefined)
+			assert.equal(activity.getMinutesActive(8, "2023/03/24"), undefined)
 		}); 
 
 		it('should tell user if they have met their step goal for the day if date exists in data', () => {
 			assert.equal(activity.determineReachGoal(2, "2023/03/24"),`You walked 3049 steps today. That's 5951 steps below your goal of 9000 steps.`)
 			assert.equal(activity.determineReachGoal(3, "2023/03/24"),'You walked 12970 steps today. Thats 9970 steps above your goal of 3000 steps!')
-			assert.equal(activity.determineReachGoal(3, "2026/03/24"),'this day doesnt exist!')
+			assert.equal(activity.determineReachGoal(3, "2026/03/24"), undefined)
+			assert.equal(activity.determineReachGoal(8, "2023/03/24"), undefined)
 		});
 
 		it('should return activity from a week if dates exist in data', () => {
@@ -57,7 +77,8 @@ describe('activity class', () => {
 				'2023/03/26': 261,
 				'2023/03/27': 261
 			})
-			assert.equal(activity.overAWeek(1, "2028/03/24", "2028/03/27"), 'wrongDates!')
+			assert.deepEqual(activity.overAWeek(1, "2028/03/24", "2028/03/27"), {})
+			assert.deepEqual(activity.overAWeek(8, "2023/03/24", "2023/03/27"), {})
 		}); 
 });
 
