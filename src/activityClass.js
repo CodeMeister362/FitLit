@@ -64,6 +64,41 @@ class Activity {
     }, {})
     return userObject
   }
-};
 
+  getAllMilesWalked = (givenId) => {
+   const specificUser = this.data.users.find((user) => user.id === givenId)
+   const specificUserStrideLength = specificUser.strideLength
+   const usersSteps = this.activity.activityData.filter(day => day.userID === givenId ) 
+   const allSteps = usersSteps.reduce((acc, day) => {
+            acc += day.numSteps         
+      return acc
+    }, 0)  
+    return (Math.round((allSteps * specificUserStrideLength / 63360) * 10) / 10);
+    } 
+  
+  getPercentGoalsMet = (givenId) => {
+      const specificUser = this.data.users.find((user) => {
+        return user.id === givenId
+      }) 
+      const specificUserStepGoal = specificUser.dailyStepGoal
+      console.log(specificUserStepGoal)
+      const usersData = this.activity.activityData.filter(day => day.userID === givenId ) 
+      console.log(usersData)
+      const totalDays = usersData.length;
+      console.log(totalDays)
+
+      const daysMet = usersData.reduce((acc, day) => {
+        if ( day.numSteps >= specificUserStepGoal) {
+          acc += 1
+      }
+      return acc
+   }, 0)
+
+  const percentMet = (daysMet / totalDays) * 100; 
+
+  return(`In the last ${totalDays} days you've met your step goal ${percentMet.toFixed(0)}% of the time and walked `);
+  
+  }
+}
 export default Activity;
+

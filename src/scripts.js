@@ -51,7 +51,6 @@ window.addEventListener("load", () => {
     if(inputDate.value && inputNumSteps.value && inputMinActive.value && inputStairs.value){
     const dataToSend = new newData(randomNum, inputDate.value.replace(/-/g, '/'), inputNumSteps.value, inputMinActive.value, inputStairs.value)
     console.log(dataToSend)
-
     // dataToSend.keys
     // dataToSend.values
 
@@ -92,7 +91,6 @@ window.addEventListener("load", () => {
 
   apiCalls.fetchUsers().then((data) => {
     
-    
 
     const userCard = document.querySelector('.user-card');
     const user = new UserRepository(data);
@@ -101,12 +99,11 @@ window.addEventListener("load", () => {
       <ul>
         <li>Your daily step goal is ${data.users[randomNum].dailyStepGoal}</li>
         <li>The average step goal of all FitLitFans is ${user.getAverageSteps(data.users)}</li>
+       
       </ul>`
     })
     .catch((error) => {
     console.error('Error fetching user data:', error);
-
-
  });
 
   apiCalls.fetchHydration().then((data) => {
@@ -283,9 +280,46 @@ window.addEventListener("load", () => {
       const todayDate = new Date().toLocaleDateString('fr-CA', display).replace(/-/g, '/');
       const aWeekEarlier = new Date(new Date().setDate(new Date().getDate() - 7)).toLocaleDateString('fr-CA', display).replace(/-/g, '/');
       const activityWeekObject = userActivity.overAWeek(randomNum, aWeekEarlier, todayDate);
+      const allMilesWalked = userActivity.getAllMilesWalked(randomNum);
+      const percentGoalsMet = userActivity.getPercentGoalsMet(randomNum);
       const activityWeekKeys = Object.keys(activityWeekObject);
       const activityWeekValues = Object.values(activityWeekObject);
+      const userCard = document.querySelector('.user-card');
       
+      userCard.innerHTML += ` <li>${percentGoalsMet} ${allMilesWalked} miles!</li> `
+
+  
+
+      
+      const displayAddedActivity = document.querySelector('.new-data-display')
+
+      inputButton.addEventListener('click', function(){
+            setTimeout(function(){
+        apiCalls.fetchActivity().then((newActivityData) => {
+          const activityValues = Object.values(newActivityData).flat()
+          const mostRecentData = activityValues[activityValues.length - 1]
+
+            displayAddedActivity.innerHTML = 
+            `<h3>This data has been added!</h3>
+              <p class="new-date">${mostRecentData.date}</p>
+              <p class="new-steps">Steps: ${mostRecentData.numSteps}</p>
+              <p class="new-active">Min. Active: ${mostRecentData.minutesActive}</p>
+              <P class="new-stairs">Stairs Climbed: ${mostRecentData.flightsOfStairs}</P>
+            `
+          })
+        }, 500)  
+        setTimeout(function(){
+          displayAddedActivity.innerHTML = 
+          `<h3></h3>
+            <p class="new-date"></p>
+            <p class="new-steps"></p>
+            <p class="new-active"></p>
+            <P class="new-stairs"></P>
+          `
+        }, 7000)
+        })
+
+
       activityCard.innerHTML = 
         `<h3>Your Activity</h3>
           <ul>
