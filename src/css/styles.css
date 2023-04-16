@@ -30,7 +30,8 @@ body {
   width: 90cqmax fit-content;
   background-color: #8f8af6;
   color: aliceblue;
-  padding-right: 5%;
+  padding: 3%;
+  border-radius: .2em
 }
 
 h3 {
@@ -40,11 +41,12 @@ h3 {
 .quotes {
   font-style: italic;
   font-size: x-large;
-  color: yellow;
+  color: rgb(236, 239, 148);
   text-align: center;
 }
 
 .activity-chart {
+  background-color: rgb(37, 22, 118);
   max-width:400px;
   min-width:100px;
   max-height: 400px;
