@@ -81,11 +81,8 @@ class Activity {
         return user.id === givenId
       }) 
       const specificUserStepGoal = specificUser.dailyStepGoal
-      console.log(specificUserStepGoal)
       const usersData = this.activity.activityData.filter(day => day.userID === givenId ) 
-      console.log(usersData)
       const totalDays = usersData.length;
-      console.log(totalDays)
 
       const daysMet = usersData.reduce((acc, day) => {
         if ( day.numSteps >= specificUserStepGoal) {
