@@ -14,9 +14,12 @@ class UserRepository {
     }, 0)
         return Math.round(steps / this.data.users.length)
   }
+
   getFirstName = (id) => {
     const fullName = this.data.users.find((user) => user.id === id)
+    if (fullName) {
       return fullName.name.split(' ').shift()
+    }
   };
 };
 
