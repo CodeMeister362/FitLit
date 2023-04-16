@@ -4,7 +4,6 @@ import './css/styles.css';
 // Images
 import './images/turing-logo.png';
 import './images/runner.png';
-import './images/wave.png';
 
 // Fetch requests
 import * as apiCalls from './apiCalls'; 
@@ -19,15 +18,6 @@ import newData from './newData';
 import Chart from 'chart.js/auto';
 
 
-
-
-// const checkInputs = () => {
-//   if(inputDate.value.length >= 3 && inputStairs.value.length >= 3 && inputMinActive.value.length >= 3 && inputNumSteps.value.length >= 3){
-//     console.log('hey')
-//   } else {
-//     console.log('missing inputs')
-//   }
-// }
 
 window.addEventListener("load", () => {
 
@@ -51,10 +41,7 @@ window.addEventListener("load", () => {
     if(inputDate.value && inputNumSteps.value && inputMinActive.value && inputStairs.value){
     const dataToSend = new newData(randomNum, inputDate.value.replace(/-/g, '/'), inputNumSteps.value, inputMinActive.value, inputStairs.value)
     console.log(dataToSend)
-    // dataToSend.keys
-    // dataToSend.values
-
-    // innerhtml graph of the new data
+   
 
     fetch('http://localhost:3001/api/v1/activity', {
       method: 'POST',
@@ -122,7 +109,7 @@ window.addEventListener("load", () => {
       <ul>
         <li>Your average fluid ounces consumed per day is ${userWater.averageOuncesPerDay(randomNum)}</li>
         <li>You drank ${userWater.getSpecificDay(randomNum, todayDate)} ounces today</li>
-        </ul>
+      </ul>
         <canvas class="hydration-chart"></canvas>
         `
 
@@ -187,14 +174,14 @@ window.addEventListener("load", () => {
     `<h3>Your Sleep</h3>
     <ul>
       <li><b>Last Night</b>
-        <p>${sleepDay} hours slept</p>
-        <p>${dayQuality} sleep quality</p>
+      <li>${sleepDay} hours slept</li>
+      <li>${dayQuality} sleep quality</li>
     </ul>
     <canvas class="sleep-chart"></canvas>
     <ul>
       <li><b>All Time</b></li>
-        <p>${allTimeSleep} hours slept</p>
-        <p>${allTimeSleepQuality} sleep quality</p>
+      <li>${allTimeSleep} hours slept</li>
+      <li>${allTimeSleepQuality} sleep quality</li>
     </ul>
     <canvas class="quality-sleep-chart"></canvas>
     `
@@ -286,7 +273,7 @@ window.addEventListener("load", () => {
       const activityWeekValues = Object.values(activityWeekObject);
       const userCard = document.querySelector('.user-card');
       
-      userCard.innerHTML += ` <li>${percentGoalsMet} ${allMilesWalked} miles!</li> `
+      userCard.innerHTML += ` <p>${percentGoalsMet} ${allMilesWalked} miles!</p> `
 
   
 

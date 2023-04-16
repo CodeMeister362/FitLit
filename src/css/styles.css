@@ -28,7 +28,7 @@ body {
 
 .cards {
   width: 90cqmax fit-content;
-  background-color: #8f8af6;
+  background-color: #121032;
   color: aliceblue;
   padding: 3%;
   border-radius: .2em
@@ -46,7 +46,7 @@ h3 {
 }
 
 .activity-chart {
-  background-color: rgb(37, 22, 118);
+  background-color: rgb(168, 157, 229);
   max-width:400px;
   min-width:100px;
   max-height: 400px;
@@ -54,6 +54,7 @@ h3 {
 }
 
 .hydration-chart {
+  background-color: rgb(168, 157, 229);
   max-width:400px;
   min-width:100px;
   max-height: 400px;
@@ -61,6 +62,7 @@ h3 {
 }
 
 .sleep-chart {
+  background-color: rgb(168, 157, 229);
   max-width:400px;
   min-width:100px;
   max-height: 400px;
@@ -68,6 +70,7 @@ h3 {
 }
 
 .quality-sleep-chart {
+  background-color: rgb(168, 157, 229);
   max-width:400px;
   min-width:100px;
   max-height: 400px;
