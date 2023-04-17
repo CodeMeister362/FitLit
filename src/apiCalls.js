@@ -1,27 +1,64 @@
-const fitFans = "http://localhost:3001/api/v1/users"
-const hydrate = "http://localhost:3001/api/v1/hydration"
-const move = "http://localhost:3001/api/v1/activity"
-const sleep = "http://localhost:3001/api/v1/sleep"
+const URL = "http://localhost:3001/api/v1/"
 const quotes = "https://type.fit/api/quotes"
 
 export function fetchUsers() {
-  return fetch(fitFans)
-    .then(response => response.json());
+  return fetch(`${URL}users`)
+    .then((response) => {
+      if(!response.ok) {
+        throw new Error(`${response.status}`)
+      } else {
+        return response.json();
+      }
+  })
+  .catch((error) =>{
+  console.error('User Data Error', error);
+  alert("Network Unavailable");
+})
 };
 
 export function fetchHydration() {
-  return fetch(hydrate)
-    .then(response => response.json())
+  return fetch(`${URL}hydration`)
+    .then((response) => {
+      if(!response.ok) {
+        throw new Error(`${response.status}`)
+      } else {
+        return response.json();
+      }
+  })
+  .catch((error) =>{
+    console.error('Hydration Data Error', error);
+    alert("Network Unavailable");
+  })
 };
 
 export function fetchActivity() {
-  return fetch(move)
-  .then(response => response.json())
+  return fetch(`${URL}activity`)
+    .then((response) => {
+      if(!response.ok) {
+        throw new Error(`${response.status}`)
+      } else {
+        return response.json();
+      }
+  })
+  .catch((error) =>{
+    console.error('Activity Data Error', error);
+    alert("Network Unavailable");
+  })
 };
 
 export function fetchSleep() {
-  return fetch(sleep)
-    .then(response => response.json())
+  return fetch(`${URL}sleep`)
+    .then((response) => {
+      if(!response.ok) {
+        throw new Error(`${response.status}`)
+      } else {
+        return response.json();
+      }
+  })
+  .catch((error) =>{
+    console.error('Sleep Data Error', error);
+    alert("Network Unavailable");
+  })
 };
 
 export function inspireQuotes() {
