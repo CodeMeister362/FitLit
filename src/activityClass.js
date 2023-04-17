@@ -67,19 +67,22 @@ class Activity {
 
   getAllMilesWalked = (givenId) => {
    const specificUser = this.data.users.find((user) => user.id === givenId)
+   if (specificUser) { 
    const specificUserStrideLength = specificUser.strideLength
    const usersSteps = this.activity.activityData.filter(day => day.userID === givenId ) 
    const allSteps = usersSteps.reduce((acc, day) => {
             acc += day.numSteps         
       return acc
-    }, 0)  
+    }, 0) 
     return (Math.round((allSteps * specificUserStrideLength / 63360) * 10) / 10);
     } 
+  }
   
   getPercentGoalsMet = (givenId) => {
       const specificUser = this.data.users.find((user) => {
         return user.id === givenId
-      }) 
+      })
+      if (specificUser) {
       const specificUserStepGoal = specificUser.dailyStepGoal
       const usersData = this.activity.activityData.filter(day => day.userID === givenId ) 
       const totalDays = usersData.length;
@@ -95,6 +98,7 @@ class Activity {
 
   return(`In the last ${totalDays} days you've met your step goal ${percentMet.toFixed(0)}% of the time and walked`);
   
+    }
   }
 }
 export default Activity;

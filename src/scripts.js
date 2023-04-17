@@ -27,10 +27,10 @@ window.addEventListener("load", () => {
   });
 
   function getRandomInt() {
-    return Math.floor(Math.random() * 50);
+    return Math.floor(Math.random() * 49 + 1);
   };
   const randomNum = getRandomInt();
-
+  console.log(randomNum)
   const buttonChange = (event) => {
     event.preventDefault()
   }

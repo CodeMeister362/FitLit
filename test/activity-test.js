@@ -85,7 +85,7 @@ describe('activity class', () => {
       assert.equal(activity.getAllMilesWalked(1), 1.9)
       assert.equal(activity.getAllMilesWalked(3), 2.2)
 
-      //assert.equal(activity.getAllMilesWalked(5), undefined)
+      assert.equal(activity.getAllMilesWalked(5), undefined)
     });
 
     it('should return percentage for users goal acheivments', () => {
@@ -95,6 +95,8 @@ describe('activity class', () => {
       assert.equal(activity.getPercentGoalsMet(2), 
       `In the last 4 days you've met your step goal 75% of the time and walked`
       )
+
+      assert.equal(activity.getPercentGoalsMet(5), undefined)
     });
 });
 
