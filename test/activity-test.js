@@ -79,6 +79,22 @@ describe('activity class', () => {
 			})
 			assert.deepEqual(activity.overAWeek(1, "2028/03/24", "2028/03/27"), {})
 			assert.deepEqual(activity.overAWeek(8, "2023/03/24", "2023/03/27"), {})
-		}); 
+		});
+
+    it('should rerturn miles walked', () => {
+      assert.equal(activity.getAllMilesWalked(1), 1.9)
+      assert.equal(activity.getAllMilesWalked(3), 2.2)
+
+      //assert.equal(activity.getAllMilesWalked(5), undefined)
+    });
+
+    it('should return percentage for users goal acheivments', () => {
+      assert.equal(activity.getPercentGoalsMet(1), 
+      `In the last 4 days you've met your step goal 100% of the time and walked`
+      )
+      assert.equal(activity.getPercentGoalsMet(2), 
+      `In the last 4 days you've met your step goal 75% of the time and walked`
+      )
+    });
 });
 

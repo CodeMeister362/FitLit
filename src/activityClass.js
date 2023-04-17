@@ -93,7 +93,7 @@ class Activity {
 
   const percentMet = (daysMet / totalDays) * 100; 
 
-  return(`In the last ${totalDays} days you've met your step goal ${percentMet.toFixed(0)}% of the time and walked `);
+  return(`In the last ${totalDays} days you've met your step goal ${percentMet.toFixed(0)}% of the time and walked`);
   
   }
 }
