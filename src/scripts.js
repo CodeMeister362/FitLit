@@ -14,10 +14,7 @@ import Water from './hydrationClass';
 import Activity from './activityClass'
 import Sleep from './sleepClass';
 import newData from './newData';
-
 import Chart from 'chart.js/auto';
-
-
 
 window.addEventListener("load", () => {
 
@@ -30,51 +27,8 @@ window.addEventListener("load", () => {
     return Math.floor(Math.random() * 49 + 1);
   };
   const randomNum = getRandomInt();
-  console.log(randomNum)
-  const buttonChange = (event) => {
-    event.preventDefault()
-  }
-  
-  const makeNewData = (event) => {
-    event.preventDefault()
-    console.log('clicked')
-    if(inputDate.value && inputNumSteps.value && inputMinActive.value && inputStairs.value){
-    const dataToSend = new newData(randomNum, inputDate.value.replace(/-/g, '/'), inputNumSteps.value, inputMinActive.value, inputStairs.value)
-    console.log(dataToSend)
-   
 
-    fetch('http://localhost:3001/api/v1/activity', {
-      method: 'POST',
-      body: JSON.stringify(dataToSend), 
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    })
-      .then((response) => {
-        if(!response.ok) {
-          throw new Error(`${response.status}`)
-        } else {
-          return response.json()
-        }
-      })
-      .then(json => console.log(json))
-      .catch(err => console.log(`error`));
-  } else {
-    console.log('error')
-  }
-  }
-  
-  const inputDate = document.querySelector('.date-input')
-  const inputStairs = document.querySelector('.stairs-input')
-  const inputMinActive = document.querySelector('.min-active')
-  const inputNumSteps = document.querySelector('.steps-input')
-  const inputButton = document.querySelector('.add-data-button')
-  
-  inputDate.addEventListener('input', buttonChange)
-  inputStairs.addEventListener('input', buttonChange)
-  inputMinActive.addEventListener('input', buttonChange)
-  inputNumSteps.addEventListener('input', buttonChange)
-  inputButton.addEventListener('click', makeNewData)
+  //USER DATA FETCH CALL
 
   apiCalls.fetchUsers().then((data) => {
     
@@ -92,6 +46,8 @@ window.addEventListener("load", () => {
     .catch((error) => {
     console.error('Error fetching user data:', error);
  });
+
+ /////HYDRATION FETCH CALL
 
   apiCalls.fetchHydration().then((data) => {
     const waterCard = document.querySelector('.water-card');
@@ -151,6 +107,9 @@ window.addEventListener("load", () => {
    .catch((error) => {
     console.error('Error fetching hydration data:', error);
  });
+
+
+ ////SLEEP FETCH CALL
 
   apiCalls.fetchSleep()
    .then((data) => {
@@ -259,6 +218,8 @@ window.addEventListener("load", () => {
     console.error('Error fetching sleep data:', error);
  });
 
+ ///USER AND ACTIVITY DATA FETCH CALL
+
   apiCalls.fetchUsers().then((userData) => {
     apiCalls.fetchActivity().then((activitydata) => {
       const activityCard = document.querySelector('.activity-card');
@@ -274,38 +235,65 @@ window.addEventListener("load", () => {
       const userCard = document.querySelector('.user-card');
       
       userCard.innerHTML += ` <p>${percentGoalsMet} ${allMilesWalked} miles!</p> `
+      
 
-  
+      const makeNewData = (event) => {
+        event.preventDefault()
+        
+        if(inputDate.value && inputNumSteps.value && inputMinActive.value && inputStairs.value){
+        const dataToSend = new newData(randomNum, inputDate.value.replace(/-/g, '/'), inputNumSteps.value, inputMinActive.value, inputStairs.value)
+        console.log(dataToSend)
+
+
+      setTimeout(function(){
+        console.log('added data')
+        displayAddedActivity.innerHTML = 
+        `<h3>This data has been added!</h3>
+          <p class="new-date">Date: ${dataToSend.date}</p>
+          <p class="new-steps">Steps: ${dataToSend.numSteps}</p>
+          <p class="new-active">Minutes Active: ${dataToSend.minutesActive}</p>
+          <P class="new-stairs">Flights of Stairs Climbed: ${dataToSend.flightsOfStairs}</P>
+        `
+      
+      }, 500)  
+      inputDate.value = ''
+      inputStairs.value = ''
+      inputMinActive.value = ''
+      inputNumSteps.value = ''
+
 
       
-      const displayAddedActivity = document.querySelector('.new-data-display')
-
-      inputButton.addEventListener('click', function(){
-            setTimeout(function(){
-        apiCalls.fetchActivity().then((newActivityData) => {
-          const activityValues = Object.values(newActivityData).flat()
-          const mostRecentData = activityValues[activityValues.length - 1]
-
-            displayAddedActivity.innerHTML = 
-            `<h3>This data has been added!</h3>
-              <p class="new-date">${mostRecentData.date}</p>
-              <p class="new-steps">Steps: ${mostRecentData.numSteps}</p>
-              <p class="new-active">Min. Active: ${mostRecentData.minutesActive}</p>
-              <P class="new-stairs">Stairs Climbed: ${mostRecentData.flightsOfStairs}</P>
-            `
-          })
-        }, 500)  
-        setTimeout(function(){
-          displayAddedActivity.innerHTML = 
-          `<h3></h3>
-            <p class="new-date"></p>
-            <p class="new-steps"></p>
-            <p class="new-active"></p>
-            <P class="new-stairs"></P>
-          `
-        }, 7000)
+        fetch('http://localhost:3001/api/v1/activity', {
+          method: 'POST',
+          body: JSON.stringify(dataToSend), 
+          headers: {
+            'Content-Type': 'application/json'
+          }
         })
+          .then((response) => {
+            if(!response.ok) {
+              throw new Error(`${response.status}`)
+            } else {
+              return response.json()
+            }
+          })
+          .catch(error => console.log('Post Data Error', error));
+      } else {
+        displayAddedActivity.innerHTML = `
+        <h3>All Input Fields Required!</h3>
+        `
+      }
+      }
 
+      const displayAddedActivity = document.querySelector('.new-data-display')
+      const inputDate = document.querySelector('.date-input')
+      const inputStairs = document.querySelector('.stairs-input')
+      const inputMinActive = document.querySelector('.min-active')
+      const inputNumSteps = document.querySelector('.steps-input')
+      const inputButton = document.querySelector('.add-data-button')
+
+
+      inputButton.addEventListener('click', makeNewData)
 
       activityCard.innerHTML = 
         `<h3>Your Activity</h3>
