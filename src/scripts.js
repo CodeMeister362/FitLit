@@ -20,7 +20,7 @@ window.addEventListener("load", () => {
 
   apiCalls.inspireQuotes().then((data) => {
     const zen = document.querySelector(".quotes")
-      zen.innerText = `"${data[randomNum].text} - ${data[randomNum].author}`
+      zen.innerText = `"${data[randomNum].text}" - ${data[randomNum].author}`
   });
 
   function getRandomInt() {
@@ -28,11 +28,9 @@ window.addEventListener("load", () => {
   };
   const randomNum = getRandomInt();
 
-  //USER DATA FETCH CALL
-
+  // USER DATA FETCH CALL
   apiCalls.fetchUsers().then((data) => {
     
-
     const userCard = document.querySelector('.user-card');
     const user = new UserRepository(data);
     userCard.innerHTML = 
@@ -40,15 +38,13 @@ window.addEventListener("load", () => {
       <ul>
         <li>Your daily step goal is ${data.users[randomNum].dailyStepGoal}</li>
         <li>The average step goal of all FitLitFans is ${user.getAverageSteps(data.users)}</li>
-       
       </ul>`
     })
     .catch((error) => {
     console.error('Error fetching user data:', error);
  });
 
- /////HYDRATION FETCH CALL
-
+ // HYDRATION FETCH CALL
   apiCalls.fetchHydration().then((data) => {
     const waterCard = document.querySelector('.water-card');
     const userWater = new Water(data);
@@ -58,7 +54,6 @@ window.addEventListener("load", () => {
     const overAWeekObject = userWater.overAWeek(randomNum, aWeekEarlier, todayDate);
     const hydrationWeekKeys = Object.keys(overAWeekObject);
     const hydrationWeekValues = Object.values(overAWeekObject);
-
 
     waterCard.innerHTML =
       `<h3>Your Hydration</h3>
@@ -108,9 +103,7 @@ window.addEventListener("load", () => {
     console.error('Error fetching hydration data:', error);
  });
 
-
- ////SLEEP FETCH CALL
-
+ // SLEEP FETCH CALL
   apiCalls.fetchSleep()
    .then((data) => {
     const userSleep = new Sleep(data, randomNum);
@@ -144,6 +137,7 @@ window.addEventListener("load", () => {
     </ul>
     <canvas class="quality-sleep-chart"></canvas>
     `
+
     new Chart(document.querySelector(".quality-sleep-chart"), {
       type: 'line',
       data: {
@@ -218,8 +212,7 @@ window.addEventListener("load", () => {
     console.error('Error fetching sleep data:', error);
  });
 
- ///USER AND ACTIVITY DATA FETCH CALL
-
+ // USER AND ACTIVITY DATA FETCH CALL
   apiCalls.fetchUsers().then((userData) => {
     apiCalls.fetchActivity().then((activitydata) => {
       const activityCard = document.querySelector('.activity-card');
@@ -236,7 +229,6 @@ window.addEventListener("load", () => {
       
       userCard.innerHTML += ` <p>${percentGoalsMet} ${allMilesWalked} miles!</p> `
       
-
       const makeNewData = (event) => {
         event.preventDefault()
         
@@ -244,9 +236,7 @@ window.addEventListener("load", () => {
         const dataToSend = new newData(randomNum, inputDate.value.replace(/-/g, '/'), inputNumSteps.value, inputMinActive.value, inputStairs.value)
         console.log(dataToSend)
 
-
       setTimeout(function(){
-        console.log('added data')
         displayAddedActivity.innerHTML = 
         `<h3>This data has been added!</h3>
           <p class="new-date">Date: ${dataToSend.date}</p>
@@ -254,15 +244,12 @@ window.addEventListener("load", () => {
           <p class="new-active">Minutes Active: ${dataToSend.minutesActive}</p>
           <P class="new-stairs">Flights of Stairs Climbed: ${dataToSend.flightsOfStairs}</P>
         `
-      
       }, 500)  
       inputDate.value = ''
       inputStairs.value = ''
       inputMinActive.value = ''
       inputNumSteps.value = ''
 
-
-      
         fetch('http://localhost:3001/api/v1/activity', {
           method: 'POST',
           body: JSON.stringify(dataToSend), 
@@ -291,7 +278,6 @@ window.addEventListener("load", () => {
       const inputMinActive = document.querySelector('.min-active')
       const inputNumSteps = document.querySelector('.steps-input')
       const inputButton = document.querySelector('.add-data-button')
-
 
       inputButton.addEventListener('click', makeNewData)
 
@@ -341,6 +327,4 @@ window.addEventListener("load", () => {
       })
       });
     });
-
-  
   });

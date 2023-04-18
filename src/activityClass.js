@@ -31,7 +31,7 @@ class Activity {
 
   getMinutesActive = (givenId, date) => {
     const data = this.getSpecificDayData(givenId, date);
-    if (data){
+    if (data) {
       const specificUser = this.activity.activityData.find((data) => {
         return data.date === date && data.userID === givenId
       })
@@ -97,9 +97,7 @@ class Activity {
   const percentMet = (daysMet / totalDays) * 100; 
 
   return(`In the last ${totalDays} days you've met your step goal ${percentMet.toFixed(0)}% of the time and walked`);
-  
     }
   }
 }
 export default Activity;
-

@@ -2,9 +2,10 @@ import { assert } from 'chai';
 import Sleep from '../src/sleepClass';
 import sampleSleepData from './sleep-mock-data';
 
-
 describe("Sleep Class", () => {
+  
   let mockSleep;
+
  beforeEach(() => {
 
     mockSleep = new Sleep(sampleSleepData, 1);
@@ -16,7 +17,7 @@ describe("Sleep Class", () => {
     assert.equal(mockSleep.getUserData(), "This is not a valid user ID");
   });
 
-  it("should calculate the ave hours a usser has slept for all time", function() {
+  it("should calculate the ave hours a user has slept for all time", function() {
     assert.equal(mockSleep.getAllTimeSleepAve(), 7)
   });
 
@@ -36,7 +37,6 @@ describe("Sleep Class", () => {
   assert.equal(mockSleep.getSleepQualityByDay("2000/03/13"), "Date not found");
   })
 
-
   it("should return hours slept for each day over 7 days", function() {
     assert.deepEqual(mockSleep.getHoursSleptByWeek("2023/03/24", "2023/03/30"), {
     "2023/03/24" : 9.6,
@@ -49,8 +49,6 @@ describe("Sleep Class", () => {
     })
     assert.deepEqual(mockSleep.getHoursSleptByWeek("2020/03/24", "2000/03/30"), "Dates not found.")
   });
-
-
 
 it("should return sleep quality for each day over 7 days", function() {
     assert.deepEqual(mockSleep.getSleepQualitytByWeek( "2023/03/24", "2023/03/30"), {

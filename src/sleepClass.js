@@ -3,35 +3,31 @@ class Sleep{
     this.data = data;
     this.userID = userID;
     this.userData = this.getUserData();
-   
   }
   
-  
-getUserData() {
-   
- const userSleepData = this.data.sleepData.filter((sleepObject) => sleepObject.userID === this.userID);
- if(userSleepData.length < 1) {
-    return "This is not a valid user ID"
-  } else {
-    return userSleepData
+  getUserData() {
+  const userSleepData = this.data.sleepData.filter((sleepObject) => sleepObject.userID === this.userID);
+  if(userSleepData.length < 1) {
+      return "This is not a valid user ID"
+    } else {
+      return userSleepData
+    }
   }
-}
 
-getAllTimeSleepAve() {
-  const totalHoursSlept = this.userData.reduce((acc, eachDay) => {
-    acc += eachDay.hoursSlept;
-      return acc 
-    }, 0);
-    return Math.round(totalHoursSlept / this.userData.length);
-  };
+  getAllTimeSleepAve() {
+    const totalHoursSlept = this.userData.reduce((acc, eachDay) => {
+      acc += eachDay.hoursSlept;
+        return acc 
+      }, 0);
+      return Math.round(totalHoursSlept / this.userData.length);
+    };
 
-  getAllTimeQualityAve = () => {
-   
-    let alltimeQuality = this.userData.reduce((acc, currentDay) => {
+  getAllTimeQualityAve = () => {   
+    const alltimeQuality = this.userData.reduce((acc, currentDay) => {
       acc += currentDay.sleepQuality;
       return acc
-    }, 0);
-    return Math.round(alltimeQuality / this.userData.length);
+      }, 0);
+      return Math.round(alltimeQuality / this.userData.length);
   };
 
   getHoursByDay(specificDate) {
@@ -54,23 +50,20 @@ getAllTimeSleepAve() {
   };
 
   getHoursSleptByWeek = (start, end) => {
-
    const datesByWeek = this.userData.reduce((acc, day) => {
-    if(day.date >= start && day.date <= end) {
+    if (day.date >= start && day.date <= end) {
       acc[day.date] = day.hoursSlept
     }
     return acc
   }, {})
-    if ( Object.keys(datesByWeek).length < 1 ) {
+    if (Object.keys(datesByWeek).length < 1) {
       return "Dates not found."
     } else {
       return datesByWeek;
     }
   };
 
-
   getSleepQualitytByWeek = (start, end) => {
-  
    const sleepQualityWeek = this.userData.reduce((acc, day) => {
     if(day.date >= start && day.date <= end) {
       acc[day.date] = day.sleepQuality

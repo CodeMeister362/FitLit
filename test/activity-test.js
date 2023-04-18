@@ -1,6 +1,5 @@
 import { assert } from 'chai';
 import Activity from '../src/activityClass';
-// import UserRepository from '../src/UserRepository';
 import activityMockData from '../src/data/activity-mock-data';
 import userMockData from '../src/data/user-mock-data';
 
@@ -95,7 +94,7 @@ describe('activity class', () => {
       assert.equal(activity.getPercentGoalsMet(2), 
       `In the last 4 days you've met your step goal 75% of the time and walked`
       )
-
+			
       assert.equal(activity.getPercentGoalsMet(5), undefined)
     });
 });
