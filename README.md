@@ -9,8 +9,7 @@ FitLit displays trends of the user's physical activity over time, including how 
 
 ### Preview of App:
 [//]: <> (Provide ONE gif or screenshot of your application - choose the "coolest" piece of functionality to show off.)
-![Screen Recording 2023-04-17 at 8 24 46 PM](https://user-images.githubusercontent.com/117617970/232655861-7f24b773-f429-4a53-9780-b0c5f0e66317.gif)
-
+![Screen Recording 2023-04-17 at 8 24 46 PM](https://user-images.githubusercontent.com/117617970/232657945-8692238a-603b-4528-8aee-b33cd1215b02.gif)
 
 ### Context:
 [//]: <> (Give some context for the project here. How long did you have to work on it? How far into the Turing program are you?)
@@ -28,15 +27,15 @@ This application was completed as a group project for the Front-End software dev
 ### Learning Goals & Project Outcomes:
 [//]: <> (What were the learning goals of this project? What tech did you work with?)
 
--Sources external data and leverages multiple API calls to retrieve and process the data
--Implements a local API 
--Uses POST methods to give the ability for a user to update their data
--To improve accessibility, we used semantic HTML and the font Atkinson Hyperlegible designed by the Braille Institute for high readability
--Implemented instructor feedback to improve the quality and functionality of the application
--Application is built with JavaScript, HTML, and CSS
--Follows test-driven development to ensure each method was resilient
--Includes class files that orient a given data set and have unique methods to format each data set to be more readable to the user
--This project utilizes object-oriented programming to display relevant data of a given user's health profile
+* Sources external data and leverages multiple API calls to retrieve and process the data
+* Implements a local API 
+* Uses POST methods to give the ability for a user to update their data
+* To improve accessibility, we used semantic HTML and chose the font Atkinson Hyperlegible designed by the Braille Institute for high readability
+* Implemented instructor feedback to improve the quality and functionality of the application
+* Application is built with JavaScript, HTML, and CSS
+* Follows test-driven development to ensure each method was resilient
+* Includes class files that orient a given data set and have unique methods to format each data set to be more readable to the user
+* This project utilizes object-oriented programming to display relevant data of a given user's health profile
 
 
 ### Installation Instructions:
