@@ -245,6 +245,16 @@ window.addEventListener("load", () => {
           <P class="new-stairs">Flights of Stairs Climbed: ${dataToSend.flightsOfStairs}</P>
         `
       }, 500)  
+      setTimeout(function(){
+          displayAddedActivity.innerHTML = 
+          `<h3></h3>
+            <p class="new-date"></p>
+            <p class="new-steps"></p>
+            <p class="new-active"></p>
+            <P class="new-stairs"></P>
+          `
+        }, 7000)
+
       inputDate.value = ''
       inputStairs.value = ''
       inputMinActive.value = ''
