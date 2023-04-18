@@ -10,9 +10,9 @@ body {
   align-items: center;
   background: linear-gradient(to top, #4123ef 0%, #6fbce9 99%, #cff5fe 100%);
   transition: transform 250ms ease-out;
+  font-family: 'Atkinson Hyperlegible', sans-serif;
 }
   
-
 .header-img {
   width: 100cqmax;
 }

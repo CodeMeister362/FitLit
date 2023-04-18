@@ -12,7 +12,7 @@ class UserRepository {
      acc += currentUser.dailyStepGoal
      return acc 
     }, 0)
-        return Math.round(steps / this.data.users.length)
+    return Math.round(steps / this.data.users.length)
   }
 
   getFirstName = (id) => {
